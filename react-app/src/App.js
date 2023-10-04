@@ -31,9 +31,3 @@ function App() {
 }
 
 export default App;
-
-/// fas;lkdfja;lkjdfa
-
-/// fasj;lkdfjakl;sd
-
-// ass;kldfja;slkdj;
