@@ -17,8 +17,11 @@ class Business(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     # Relationships
-    # owner = db.relationship('User', back_populates='owned_businesses')
-    # reviews = db.relationship('Review', back_populates='business', cascade='all, delete-orphan')
+    owner = db.relationship('User', back_populates='owned_businesses')
+    reviews = db.relationship('Review', back_populates='business', cascade='all, delete-orphan')
+    category_mappings = db.relationship('BusinessCategoryMapping', back_populates='business')
+
+
 
     def to_dict(self):
         return {

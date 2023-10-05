@@ -11,8 +11,9 @@ class BusinessCategoryMapping(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('business_categories.id'), nullable=False)
 
     # Relationships
-    # business = db.relationship('Business', back_populates='category_mappings')
-    # category = db.relationship('BusinessCategory', back_populates='business_mappings')
+    business = db.relationship('Business', back_populates='category_mappings')
+    category = db.relationship('BusinessCategory', back_populates='business_mappings')
+
 
     def to_dict(self):
         return {

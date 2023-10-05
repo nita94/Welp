@@ -2,6 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
+from sqlalchemy.orm import relationship
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -17,7 +18,9 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-    # Additional relationships and secondary tables to be added here as i make more models
+    # Relationships
+    owned_businesses = db.relationship('Business', back_populates='owner', lazy='dynamic')
+    created_reviews = db.relationship('Review', back_populates='reviewer', lazy='dynamic')
 
     @property
     def password(self):
