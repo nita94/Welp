@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { createBusiness } from '../../store/businesses'  // Ensure your path
+import { createBusiness } from '../../../store/businesses'  // Ensure your path
 
 const CreateBusinessForm = () => {
     const history = useHistory()

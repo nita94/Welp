@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getBusinesses } from '../../store/businesses'  // Ensure your path
+import { getBusinesses } from '../../../store/businesses';  // Absolute path
 import { Link } from 'react-router-dom'
 import './AllBusinesses.css'
 

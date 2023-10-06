@@ -1,20 +1,21 @@
 // ACTION TYPES
 const GET_ALL_BUSINESSES = 'businesses/GET_ALL_BUSINESSES';
-const GET_ONE_BUSINESS = 'businesses/GET_ONE_BUSINESS';
+const GET_SINGLE_BUSINESS = 'businesses/GET_SINGLE_BUSINESS';  
 const REMOVE_BUSINESS = 'businesses/REMOVE_BUSINESS';
 
 // ACTION CREATORS
-const getAllBusinesses = (allBusinesses) => ({
+export const getAllBusinesses = (allBusinesses) => ({
     type: GET_ALL_BUSINESSES,
     payload: allBusinesses
 });
 
-const getSingleBusiness = (business) => ({
-    type: GET_ONE_BUSINESS,
+export const getSingleBusiness = (business) => ({  // Changed
+    type: GET_SINGLE_BUSINESS,  // Changed
     payload: business
 });
 
-const removeBusiness = (businessId) => ({
+
+export const removeBusiness = (businessId) => ({
     type: REMOVE_BUSINESS,
     payload: businessId
 });
@@ -36,7 +37,7 @@ export const getSelectedBusiness = (businessId) => async (dispatch) => {
 
     if(res.ok){
         const data = await res.json();
-        dispatch(getSingleBusiness(data));
+        dispatch(getSingleBusiness(data));  // Changed
     } else {
         console.log('No business found');
     }
@@ -99,7 +100,7 @@ export default function businessesReducer(state = initialState, action) {
                 allIds: action.businesses.map(business => business.id),
             };
         }
-        case GET_ONE_BUSINESS: {
+        case GET_SINGLE_BUSINESS: {
             return {
                 ...state,
                 byId: {
