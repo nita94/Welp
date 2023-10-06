@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { createBusiness } from '../../../store/businesses'  // Ensure your path
+import { createBusiness } from '../../../store/businesses'  
 
 const CreateBusinessForm = () => {
     const history = useHistory()
@@ -16,7 +16,7 @@ const CreateBusinessForm = () => {
 
         const payload = {
             name: name,
-            owner_user_id: userId,  // Adjusting for your model structure
+            owner_user_id: userId,  
             address: address,
             description: description
         }

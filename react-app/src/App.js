@@ -36,7 +36,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          {/* You might want to add a default route here to handle 404s */}
+          {/*  route here to handle 404s */}
         </Switch>
       )}
     </>

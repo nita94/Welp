@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux"
-import { deleteBusiness, getAllBusinesses } from "../../../store/businesses"
-import { useHistory } from "react-router-dom"
+import { deleteBusiness, getBusinesses } from "../../../store/businesses"
+import { useHistory } from "react-router-dom" 
+//import { useModal } from '../../../context/Modal'
 
 const DeleteBusiness = ({ businessId }) => {
     const dispatch = useDispatch()
@@ -9,7 +10,7 @@ const DeleteBusiness = ({ businessId }) => {
     const handleDeleteBusiness = async (e) => {
         e.preventDefault()
         await dispatch(deleteBusiness(businessId))
-        await dispatch(getAllBusinesses())
+        await dispatch(getBusinesses())
         history.push('/businesses')
     }
 
@@ -21,4 +22,4 @@ const DeleteBusiness = ({ businessId }) => {
     )
 }
 
-export default DeleteBusiness
+export default DeleteBusiness;
