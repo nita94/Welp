@@ -13,22 +13,21 @@ const SingleBusiness = () => {
     const reviewsList = useSelector(state => state.reviews.reviewsList);
 
     useEffect(() => {
-        // Fetch the business data if it's not available in the store
         if (!business) {
             console.log('Fetching business data...');
             dispatch(getSelectedBusiness(businessId));
         }
 
-        // Fetch reviews for the selected business
         dispatch(getReviews(businessId));
     }, [dispatch, businessId, business]);
 
-    // Check if business is not defined yet, and render accordingly
     if (!business) {
-        return null; // or you can render a loading spinner or message here
+        return <p>Loading business data...</p>;
     }
 
-    // If business data is available, render the component
+    // Convert reviewsList object to an array
+    const reviewsArray = Object.values(reviewsList);
+
     return (
         <>
             <div className="single-business-container">
@@ -45,13 +44,16 @@ const SingleBusiness = () => {
                 </Link>
 
                 <div className="reviews-container">
-                    {reviewsList.map(review => (
-                        <div key={review.id} className="review">
-                            {console.log('Review:', review)}
-                            <p>{review.content}</p>
-                            <p>Rating: {review.rating}</p>
-                        </div>
-                    ))}
+                    {reviewsArray.length > 0 ? (
+                        reviewsArray.map(review => (
+                            <div key={review.id} className="review">
+                                <p>{review.content}</p>
+                                <p>Rating: {review.rating}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No reviews available.</p>
+                    )}
                 </div>
             </div>
         </>
