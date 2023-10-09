@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
-import LoginFormPage from "./components/LoginFormPage";
+import LoginFormPage from "./components/Landing/LoginFormPage";
+import SignupFormPage from "./components/Landing/SignupFormPage";
 import AllBusinesses from "./components/Business/AllBusinesses/AllBusinesses";
 import SingleBusiness from "./components/Business/SingleBusiness/SingleBusiness";
 import CreateBusinessForm from "./components/Business/CreateBusinessForm/CreateBusinessForm";
 import { authenticate } from "./store/session";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/Landing/Navigation";
+import LandingPage from "./components/Landing/LandingPage";  // Add this line
 
 function App() {
   const dispatch = useDispatch();
@@ -36,11 +37,15 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route exact path="/" >
+            <LandingPage />
+          </Route>
           {/*  route here to handle 404s */}
         </Switch>
       )}
     </>
   );
 }
+
 
 export default App;
