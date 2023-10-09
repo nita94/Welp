@@ -1,69 +1,68 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBusinesses } from '../../../store/businesses';
+import { Link } from 'react-router-dom';
 import './LandingPage.css';
-import { useHistory } from 'react-router-dom';
+import OpenModalButton from '../OpenModalButton';  // Ensure path is correct
+
+const AddBusinessModalContent = () => (
+  <div>
+    <h2>Add a Business</h2>
+    <p>Claim your business and start managing reviews today!</p>
+    <Link to="/businesses/new">Add a Business</Link>
+  </div>
+);
 
 const LandingPage = () => {
-  const history = useHistory();
+  const dispatch = useDispatch();
+  const businesses = useSelector(state => state.businesses.allBusinesses);
 
-  // Function to handle navigation to different paths
-  const handleNavigate = (path) => {
-    history.push(path);
-  };
+  useEffect(() => {
+    dispatch(getBusinesses());
+  }, [dispatch]);
+
+  const businessesArray = Object.values(businesses);
 
   return (
     <div className="landing-page">
-      
-      {/* Header Section */}
       <header className="header">
-        {/* Logo */}
-        <img src="logo.png" alt="Welp Logo" className="logo" />
-        
-        {/* Navigation */}
+        <img src="images/welp_logo.png" alt="Welp" className="logo" />
         <nav className="navigation">
           <ul>
             <li>
-              <button onClick={() => handleNavigate('/businesses')}>
-                Business Listings
-              </button>
+              <OpenModalButton 
+                modalComponent={<AddBusinessModalContent />} 
+                buttonText="Welp for Business" 
+              />
             </li>
             <li>
-              <button onClick={() => handleNavigate('/reviews')}>
-                User Reviews
+              <button onClick={() => window.location.href='/businesses'}>
+                Write a Review
               </button>
             </li>
           </ul>
         </nav>
       </header>
       
-      {/* Main Content */}
       <main className="main-content">
-        
-        {/* Search Bar Section */}
         <section className="search-bar">
           <input type="text" placeholder="Search for businesses..." />
-          <button type="button" onClick={() => handleNavigate('/search')}>
+          <button type="button" onClick={() => window.location.href='/search'}>
             Search
           </button>
         </section>
         
-        {/* Featured Businesses Section */}
         <section className="featured-businesses">
-          <h2>Featured Businesses</h2>
+          <h2>Your Next Review Awaits</h2>
           
-          {/* Individual Business Feature */}
-          <article className="business">
-            <img src="business1.jpg" alt="Business 1" />
-            <h3>Business Name 1</h3>
-            <p>Rating: 4.5/5</p>
-          </article>
-          
-          <article className="business">
-            <img src="business2.jpg" alt="Business 2" />
-            <h3>Business Name 2</h3>
-            <p>Rating: 4.0/5</p>
-          </article>
-          
-          {/* Add more business articles as needed */}
+          {businessesArray.map(business => (
+            <article className="business" key={business.id}>
+              <img src={business.image_url} alt={business.name} />
+              <h3>
+                <Link to={`/businesses/${business.id}`}>{business.name}</Link>
+              </h3>
+            </article>
+          ))}
         </section>
       </main>
     </div>

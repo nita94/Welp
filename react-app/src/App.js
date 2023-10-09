@@ -6,9 +6,10 @@ import SignupFormPage from "./components/Landing/SignupFormPage";
 import AllBusinesses from "./components/Business/AllBusinesses/AllBusinesses";
 import SingleBusiness from "./components/Business/SingleBusiness/SingleBusiness";
 import CreateBusinessForm from "./components/Business/CreateBusinessForm/CreateBusinessForm";
+import CreateReviewForm from "./components/Reviews/CreateReviewForm/CreateReviewForm"; 
 import { authenticate } from "./store/session";
 import Navigation from "./components/Landing/Navigation";
-import LandingPage from "./components/Landing/LandingPage";  // Add this line
+import LandingPage from "./components/Landing/LandingPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,15 +38,17 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path="/" >
+          <Route path="/create-review">
+            <CreateReviewForm />
+          </Route>
+          <Route exact path="/">
             <LandingPage />
           </Route>
-          {/*  route here to handle 404s */}
+          {/* Add a route here to handle 404s */}
         </Switch>
       )}
     </>
   );
 }
-
 
 export default App;
