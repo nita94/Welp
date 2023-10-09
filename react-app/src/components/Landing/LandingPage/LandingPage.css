@@ -54,11 +54,18 @@
     margin-left: 5%;
   }
   
-  .featured-businesses {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
+/* Add this CSS to LandingPage.css */
+.featured-businesses {
+  display: flex;
+  flex-direction: column;
+}
+
+.business-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
   
   .business {
     width: 300px;
@@ -76,4 +83,5 @@
   .business h3, .business p {
     margin: 10px;
   }
+  
   

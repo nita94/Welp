@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from 'react-router-dom';
 import { getSelectedBusiness } from "../../../store/businesses";
 import { getReviews } from "../../../store/reviews";
+import DeleteReview from "../../Reviews/DeleteReview/DeleteReview";
 import './SingleBusiness.css';
 
 const SingleBusiness = () => {
@@ -11,6 +12,9 @@ const SingleBusiness = () => {
 
     const business = useSelector(state => state.businesses.allBusinesses[String(businessId)]);
     const reviewsList = useSelector(state => state.reviews.reviewsList);
+
+    // State to control the visibility of DeleteReview
+    const [showDeleteReview, setShowDeleteReview] = useState(null);
 
     useEffect(() => {
         if (!business) {
@@ -25,7 +29,6 @@ const SingleBusiness = () => {
         return <p>Loading business data...</p>;
     }
 
-    // Convert reviewsList object to an array
     const reviewsArray = Object.values(reviewsList);
 
     return (
@@ -49,6 +52,17 @@ const SingleBusiness = () => {
                             <div key={review.id} className="review">
                                 <p>{review.content}</p>
                                 <p>Rating: {review.rating}</p>
+                                <div className="review-buttons">
+                                    {/* Render DeleteReview component conditionally */}
+                                    {showDeleteReview === review.id ? (
+                                        <DeleteReview
+                                            review={review}
+                                            onHide={() => setShowDeleteReview(null)}
+                                        />
+                                    ) : (
+                                        <button onClick={() => setShowDeleteReview(review.id)}>Delete Review</button>
+                                    )}
+                                </div>
                             </div>
                         ))
                     ) : (

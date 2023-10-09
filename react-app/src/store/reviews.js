@@ -4,7 +4,7 @@ const REMOVE_REVIEW = 'reviews/REMOVE_REVIEW';
 const SET_REVIEW_ERROR = 'reviews/SET_REVIEW_ERROR';
 const SET_REVIEW_LOADING = 'reviews/SET_REVIEW_LOADING';
 
-const getAllReviews = (reviews) => ({
+export const getAllReviews = (reviews) => ({
     type: GET_ALL_REVIEWS,
     payload: reviews,
 });
@@ -29,21 +29,21 @@ const setReviewLoading = (isLoading) => ({
     payload: isLoading,
 });
 
-
-// THUNKS
 export const getReviews = (businessId) => async (dispatch) => {
     try {
         dispatch(setReviewLoading(true));
         const res = await fetch(`/api/reviews/${businessId}`);
         if (!res.ok) throw res;
         const reviews = await res.json();
-        dispatch(getAllReviews(reviews.reviews)); // Ensure that the payload is correct
+        dispatch(getAllReviews(reviews.reviews));
     } catch (error) {
         dispatch(setReviewError(error.toString()));
     } finally {
         dispatch(setReviewLoading(false));
     }
 };
+
+// Rest of your actions remain unchanged...
 
 
 export const getReview = (reviewId) => async (dispatch) => {
@@ -63,6 +63,21 @@ export const getReview = (reviewId) => async (dispatch) => {
     }
 };
 
+export const getReviewsForBusiness = (businessId) => async (dispatch) => {
+    try {
+        dispatch(setReviewLoading(true));
+        const res = await fetch(`/api/businesses/${businessId}/reviews`);
+        if (!res.ok) throw res;
+        const reviews = await res.json();
+        dispatch(getAllReviews(reviews));
+    } catch (error) {
+        dispatch(setReviewError(error.toString()));
+    } finally {
+        dispatch(setReviewLoading(false));
+    }
+};
+
+
 export const createReview = (review) => async (dispatch) => {
     try {
         dispatch(setReviewLoading(true));
@@ -71,7 +86,6 @@ export const createReview = (review) => async (dispatch) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(review)
         });
-
         if (res.ok) {
             const newReview = await res.json();
             dispatch(getOneReview(newReview));
@@ -95,7 +109,6 @@ export const updateReview = (reviewId, updatedReview) => async (dispatch) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(updatedReview)
         });
-
         if (res.ok) {
             const updated = await res.json();
             dispatch(getOneReview(updated));
@@ -110,16 +123,19 @@ export const updateReview = (reviewId, updatedReview) => async (dispatch) => {
     }
 };
 
-export const deleteReview = (reviewId) => async (dispatch) => {
+export const deleteReview = (reviewId, businessId) => async (dispatch) => {
     try {
         dispatch(setReviewLoading(true));
         const res = await fetch(`/api/reviews/${reviewId}`, {
             method: 'DELETE',
         });
-
         if (res.ok) {
             dispatch(removeReview(reviewId));
-            return reviewId;
+            // Fetch the updated list of reviews for the business
+            const updatedReviewsRes = await fetch(`/api/reviews/${businessId}`);
+            if (!updatedReviewsRes.ok) throw updatedReviewsRes;
+            const updatedReviews = await updatedReviewsRes.json();
+            dispatch(getAllReviews(updatedReviews.reviews));
         } else {
             throw new Error('Error deleting review');
         }
@@ -130,14 +146,13 @@ export const deleteReview = (reviewId) => async (dispatch) => {
     }
 };
 
-// INITIAL STATE
-const initialState = { 
-    reviewsList: {}, 
+
+const initialState = {
+    reviewsList: {},
     singleReview: {},
     isLoading: false,
     error: null,
 };
-
 
 export default function reviewReducer(state = initialState, action) {
     switch (action.type) {
