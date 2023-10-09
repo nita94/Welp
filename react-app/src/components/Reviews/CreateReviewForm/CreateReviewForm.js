@@ -24,7 +24,7 @@ const CreateReviewForm = ({ businessId }) => {
         };
 
         try {
-            const res = await dispatch(createReview(payload));
+            const res = await dispatch(createReview(payload, businessId));
             if (res) {
                 history.push(`/businesses/${businessId}`);
             }

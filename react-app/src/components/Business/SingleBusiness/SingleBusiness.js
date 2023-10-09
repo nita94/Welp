@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from 'react-router-dom';
 import { getSelectedBusiness } from "../../../store/businesses";
 import { getReviews } from "../../../store/reviews";
+import DeleteReview from "../../Reviews/DeleteReview/DeleteReview";
 import './SingleBusiness.css';
 
 const SingleBusiness = () => {
@@ -12,23 +13,24 @@ const SingleBusiness = () => {
     const business = useSelector(state => state.businesses.allBusinesses[String(businessId)]);
     const reviewsList = useSelector(state => state.reviews.reviewsList);
 
+    // State to control the visibility of DeleteReview
+    const [showDeleteReview, setShowDeleteReview] = useState(null);
+
     useEffect(() => {
-        // Fetch the business data if it's not available in the store
         if (!business) {
             console.log('Fetching business data...');
             dispatch(getSelectedBusiness(businessId));
         }
 
-        // Fetch reviews for the selected business
         dispatch(getReviews(businessId));
     }, [dispatch, businessId, business]);
 
-    // Check if business is not defined yet, and render accordingly
     if (!business) {
-        return null; // or you can render a loading spinner or message here
+        return <p>Loading business data...</p>;
     }
 
-    // If business data is available, render the component
+    const reviewsArray = Object.values(reviewsList);
+
     return (
         <>
             <div className="single-business-container">
@@ -45,13 +47,27 @@ const SingleBusiness = () => {
                 </Link>
 
                 <div className="reviews-container">
-                    {reviewsList.map(review => (
-                        <div key={review.id} className="review">
-                            {console.log('Review:', review)}
-                            <p>{review.content}</p>
-                            <p>Rating: {review.rating}</p>
-                        </div>
-                    ))}
+                    {reviewsArray.length > 0 ? (
+                        reviewsArray.map(review => (
+                            <div key={review.id} className="review">
+                                <p>{review.content}</p>
+                                <p>Rating: {review.rating}</p>
+                                <div className="review-buttons">
+                                    {/* Render DeleteReview component conditionally */}
+                                    {showDeleteReview === review.id ? (
+                                        <DeleteReview
+                                            review={review}
+                                            onHide={() => setShowDeleteReview(null)}
+                                        />
+                                    ) : (
+                                        <button onClick={() => setShowDeleteReview(review.id)}>Delete Review</button>
+                                    )}
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No reviews available.</p>
+                    )}
                 </div>
             </div>
         </>
