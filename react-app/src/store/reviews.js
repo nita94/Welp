@@ -53,6 +53,9 @@ export const createReview = (review) => async (dispatch) => {
         const newReview = await res.json();
         dispatch(getOneReview(newReview));
         return newReview;
+    } else {
+        const errorData = await res.json();
+        return errorData; // Ensure error handling on API and pass messages here
     }
 };
 

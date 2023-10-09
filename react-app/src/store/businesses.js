@@ -1,37 +1,36 @@
-// ACTION TYPE
+// ACTION TYPES
 const GET_ALL_BUSINESSES = 'businesses/GET_ALL_BUSINESSES';
 const GET_ONE_BUSINESS = 'businesses/GET_ONE_BUSINESS';
-const REMOVE_BUSINESS = 'businesses/REMOVE_BUSINESS'
+const REMOVE_BUSINESS = 'businesses/REMOVE_BUSINESS';
 
-// ACTION CREATOR
+// ACTION CREATORS
 const getAllBusinesses = (allBusinesses) => ({
     type: GET_ALL_BUSINESSES,
     payload: allBusinesses
-})
+});
 
 const getSingleBusiness = (business) => ({
     type: GET_ONE_BUSINESS,
     payload: business
-})
+});
 
 const removeBusiness = (businessId) => ({
     type: REMOVE_BUSINESS,
     payload: businessId
-})
+});
 
 // THUNKS
 export const getBusinesses = () => async (dispatch) => {
-    const res = await fetch('/api/businesses')
+    const res = await fetch('/api/businesses');
 
     if (res.ok) {
         const data = await res.json();
-        const allBusinesses = data.businesses
-        console.log(allBusinesses)
-        dispatch(getAllBusinesses(allBusinesses));
+        dispatch(getAllBusinesses(data.businesses)); // Ensure your API sends businesses in an object like { businesses: [...] }
     } else {
-        console.log('No businesses found')
+        console.log('No businesses found');
     }
-}
+};
+
 
 export const getSelectedBusiness = (businessId) => async (dispatch) => {
     const res = await fetch(`/api/businesses/${businessId}`)
@@ -84,15 +83,34 @@ export const deleteBusiness = (businessId) => async (dispatch) => {
     }
 }
 
-const initialState = { allBusinesses: {}, singleBusiness: {} }
-// Business Reducer
+// INITIAL STATE
+const initialState = { allBusinesses: {}, singleBusiness: {} };
+
+// REDUCER
 export default function businessReducer(state = initialState, action) {
     switch (action.type) {
         case GET_ALL_BUSINESSES:
-            return { ...state, allBusinesses: action.payload }
+            const allBusinesses = {};
+            action.payload.forEach(business => {
+                allBusinesses[business.id] = business;
+            });
+            return { 
+                ...state, 
+                allBusinesses 
+            };
         case GET_ONE_BUSINESS:
-            return { ...state, singleBusiness: action.payload }
+            return { 
+                ...state, 
+                singleBusiness: action.payload 
+            };
+        case REMOVE_BUSINESS:
+            const newAllBusinesses = { ...state.allBusinesses };
+            delete newAllBusinesses[action.payload];
+            return {
+                ...state,
+                allBusinesses: newAllBusinesses
+            };
         default:
-            return state
+            return state;
     }
 }

@@ -6,18 +6,26 @@ import UpdateBusinessForm from '../UpdateBusinessForm/UpdateBusinessForm';
 import DeleteBusiness from '../DeleteBusiness/DeleteBusiness';
 import './SingleBusiness.css';
 
-
 const SingleBusiness = () => {
-    const dispatch = useDispatch()
-    const { businessId } = useParams()
-    const business = useSelector(state => state.businesses.byId[businessId])
+    const dispatch = useDispatch();
+    const { businessId } = useParams();
+
+    // Ensure businessId is a string and fetch the business data from the state
+    const business = useSelector(state => state.businesses.allBusinesses[String(businessId)]);
 
     useEffect(() => {
-        dispatch(getSelectedBusiness(businessId));  // Updated
-    }, [dispatch, businessId]);
+        // Fetch business data if not available
+        if (!business) {
+            dispatch(getSelectedBusiness(businessId));
+        }
+    }, [dispatch, businessId, business]);
 
-    if (!business) return null
+    // Handle loading state
+    if (!business) {
+        return <p>Loading...</p>;
+    }
 
+    // Your render logic here
     return (
         <>
             <div className="single-business-container">
@@ -40,7 +48,7 @@ const SingleBusiness = () => {
                 <DeleteBusiness businessId={business.id} /> */}
             </div>
         </>
-    )
-}
+    );
+};
 
-export default SingleBusiness
+export default SingleBusiness;
