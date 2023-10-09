@@ -29,13 +29,13 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(business_routes, url_prefix='/api/businesses') 
-#app.register_blueprint(review_routes, url_prefix='/api/reviews')
+app.register_blueprint(review_routes, url_prefix='/api/reviews')
 
 # Initialize Database
 db.init_app(app)
 
 # Initialize Migrate
-migrate = Migrate(app, db)  # Note: you should instantiate Migrate after db.init_app
+Migrate(app, db)  # Note: you should instantiate Migrate after db.init_app
 
 # Application Security
 CORS(app)

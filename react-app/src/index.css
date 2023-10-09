@@ -1,1 +1,13 @@
-/* TODO Add site wide styles */
+.landing-page {
+    text-align: center;
+    padding: 50px;
+    background-color: #f8f8f8;
+}
+
+.landing-page h1 {
+    color: #333;
+}
+
+.landing-page p {
+    color: #666;
+}
