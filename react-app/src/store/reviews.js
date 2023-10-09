@@ -27,7 +27,7 @@ export const getReviews = () => async (dispatch) => {
         const reviews = await res.json();
         dispatch(getAllReviews(reviews));
     } else {
-        console.log('No reviews found');
+        console.error('Error fetching reviews');
     }
 };
 
@@ -38,7 +38,7 @@ export const getReview = (reviewId) => async (dispatch) => {
         const review = await res.json();
         dispatch(getOneReview(review));
     } else {
-        console.log('No review found');
+        console.error('Error fetching review');
     }
 };
 
@@ -55,7 +55,8 @@ export const createReview = (review) => async (dispatch) => {
         return newReview;
     } else {
         const errorData = await res.json();
-        return errorData; // Ensure error handling on API and pass messages here
+        console.error('Error creating review:', errorData);
+        return errorData;
     }
 };
 
@@ -71,7 +72,7 @@ export const updateReview = (reviewId, updatedReview) => async (dispatch) => {
         dispatch(getOneReview(updated));
         return updated;
     } else {
-        console.log('Update failed');
+        console.error('Error updating review');
     }
 };
 
@@ -83,23 +84,26 @@ export const deleteReview = (reviewId) => async (dispatch) => {
     if (res.ok) {
         dispatch(removeReview(reviewId));
         return reviewId;
+    } else {
+        console.error('Error deleting review');
     }
 };
 
 // INITIAL STATE
-const initialState = { allReviews: {}, singleReview: {} };
+const initialState = { reviewsList: [], singleReview: {} };
 
 // REDUCER
 export default function reviewReducer(state = initialState, action) {
     switch (action.type) {
         case GET_ALL_REVIEWS:
-            return { ...state, allReviews: action.payload };
+            return { ...state, reviewsList: action.payload };
         case GET_ONE_REVIEW:
             return { ...state, singleReview: action.payload };
-        case REMOVE_REVIEW: 
-            const newState = { ...state };
-            delete newState.allReviews[action.payload];
-            return newState;
+        case REMOVE_REVIEW:
+            return {
+                ...state,
+                reviewsList: state.reviewsList.filter(review => review.id !== action.payload),
+            };
         default:
             return state;
     }

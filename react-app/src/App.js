@@ -42,7 +42,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/create-review">
+          <Route exact path="/businesses/:businessId/reviews/new">
             <CreateReviewForm />
           </Route>
           {userId && ( // Only render this route if userId is not null

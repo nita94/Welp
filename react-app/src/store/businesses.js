@@ -34,15 +34,18 @@ export const getBusinesses = () => async (dispatch) => {
 
 
 export const getSelectedBusiness = (businessId) => async (dispatch) => {
-    const res = await fetch(`/api/businesses/${businessId}`)
+    console.log('Fetching business data for businessId:', businessId);
+    const res = await fetch(`/api/businesses/${businessId}`);
 
     if (res.ok) {
-        const data = await res.json()
-        dispatch(getSingleBusiness(data))
+        const data = await res.json();
+        console.log('Received business data:', data);
+        dispatch(getSingleBusiness(data));
     } else {
-        console.log('No business found')
+        console.error('Failed to fetch business data');
     }
-}
+};
+
 
 export const createBusiness = (business) => async (dispatch) => {
     const res = await fetch('/api/businesses', {

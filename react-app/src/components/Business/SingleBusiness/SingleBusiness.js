@@ -2,28 +2,33 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from 'react-router-dom';
 import { getSelectedBusiness } from "../../../store/businesses";
+import { getReviews } from "../../../store/reviews";
 import './SingleBusiness.css';
 
 const SingleBusiness = () => {
     const dispatch = useDispatch();
     const { businessId } = useParams();
 
-    // Ensure businessId is a string and fetch the business data from the state
     const business = useSelector(state => state.businesses.allBusinesses[String(businessId)]);
+    const reviewsList = useSelector(state => state.reviews.reviewsList);
 
     useEffect(() => {
-        // Fetch business data if not available
+        // Fetch the business data if it's not available in the store
         if (!business) {
+            console.log('Fetching business data...');
             dispatch(getSelectedBusiness(businessId));
         }
+
+        // Fetch reviews for the selected business
+        dispatch(getReviews(businessId));
     }, [dispatch, businessId, business]);
 
-    // Handle loading state
+    // Check if business is not defined yet, and render accordingly
     if (!business) {
-        return <p>Loading...</p>;
+        return null; // or you can render a loading spinner or message here
     }
 
-    // Your render logic here
+    // If business data is available, render the component
     return (
         <>
             <div className="single-business-container">
@@ -31,14 +36,23 @@ const SingleBusiness = () => {
                 <div>{business.address}</div>
                 <div>{business.description}</div>
 
-                {/* Uncomment the below lines when UpdateBusinessForm and DeleteBusiness are implemented */}
-                {/* <UpdateBusinessForm business={business} />
-                <DeleteBusiness businessId={business.id} /> */}
-                
-                {/* Add a button to manage the business */}
                 <Link to={`/businesses/${businessId}/managebusiness`} className="manage-business-button">
                     Manage Your Business
                 </Link>
+
+                <Link to={`/businesses/${businessId}/reviews/new`} className="write-review-button">
+                    Write a Review
+                </Link>
+
+                <div className="reviews-container">
+                    {reviewsList.map(review => (
+                        <div key={review.id} className="review">
+                            {console.log('Review:', review)}
+                            <p>{review.content}</p>
+                            <p>Rating: {review.rating}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </>
     );
