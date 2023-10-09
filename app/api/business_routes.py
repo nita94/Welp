@@ -3,9 +3,9 @@ from flask_login import login_required, current_user
 from app.models import Business, db
 from app.forms.business_form import BusinessForm
 
-business_routes = Blueprint('businesses', __name__)
+business_routes = Blueprint('businesses', __name__, url_prefix='')
 
-@business_routes.route('')
+@business_routes.route('/businesses', methods=['GET'])
 def get_all_businesses():
     """
     Get all businesses
@@ -13,7 +13,7 @@ def get_all_businesses():
     all_businesses = Business.query.all()
     return {'businesses': [business.to_dict() for business in all_businesses]}
 
-@business_routes.route('/<int:business_id>')
+@business_routes.route('/businesses/<int:business_id>', methods=['GET'])
 def get_one_business(business_id):
     """
     Get one business
@@ -21,7 +21,7 @@ def get_one_business(business_id):
     business = Business.query.get(business_id)
     return business.to_dict()
 
-@business_routes.route('', methods=['POST'])
+@business_routes.route('/businesses', methods=['POST'])
 @login_required
 def create_business():
     """
@@ -42,7 +42,7 @@ def create_business():
         return new_business.to_dict()
     return {'errors': form.errors}, 400
 
-@business_routes.route('/<int:business_id>', methods=['PUT'])
+@business_routes.route('/businesses/<int:business_id>', methods=['PUT'])
 @login_required
 def update_business(business_id):
     """
@@ -60,7 +60,7 @@ def update_business(business_id):
         return business_to_update.to_dict()
     return {'errors': form.errors}, 400
 
-@business_routes.route('/<int:business_id>', methods=['DELETE'])
+@business_routes.route('/businesses/<int:business_id>', methods=['DELETE'])
 @login_required
 def delete_business(business_id):
     """
