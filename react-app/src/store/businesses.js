@@ -25,6 +25,7 @@ export const getBusinesses = () => async (dispatch) => {
 
     if (res.ok) {
         const data = await res.json();
+        
         dispatch(getAllBusinesses(data.businesses)); // Ensure your API sends businesses in an object like { businesses: [...] }
     } else {
         console.log('No businesses found');
@@ -33,15 +34,18 @@ export const getBusinesses = () => async (dispatch) => {
 
 
 export const getSelectedBusiness = (businessId) => async (dispatch) => {
-    const res = await fetch(`/api/businesses/${businessId}`)
+    console.log('Fetching business data for businessId:', businessId);
+    const res = await fetch(`/api/businesses/${businessId}`);
 
     if (res.ok) {
-        const data = await res.json()
-        dispatch(getSingleBusiness(data))
+        const data = await res.json();
+        console.log('Received business data:', data);
+        dispatch(getSingleBusiness(data));
     } else {
-        console.log('No business found')
+        console.error('Failed to fetch business data');
     }
-}
+};
+
 
 export const createBusiness = (business) => async (dispatch) => {
     const res = await fetch('/api/businesses', {
@@ -56,22 +60,31 @@ export const createBusiness = (business) => async (dispatch) => {
     }
 }
 
-export const updateBusiness = (business, businessId) => async (dispatch) => {
+export const updateBusiness = ({ business, businessId }) => async (dispatch) => {
+    console.log("UpdateBusiness Action", { business, businessId }); 
+
+    if (!businessId) {
+        console.error("Business ID is undefined or empty:", businessId);
+        return null; 
+    }
+
     const res = await fetch(`/api/businesses/${businessId}`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(business)
-    })
-    console.log(res)
-    console.log('BUSINESS ID', businessId)
+    });
+
     if (res.ok) {
-        const data = await res.json()
-        dispatch(getSelectedBusiness(businessId))
-        return data
+        const updatedBusiness = await res.json();
+        dispatch(getSelectedBusiness(updatedBusiness.id));
+        return updatedBusiness;
     } else {
-        console.log('errors')
+        console.error("Update business failed:", await res.text());
+        return null;
     }
 }
+
+
 
 export const deleteBusiness = (businessId) => async (dispatch) => {
     const res = await fetch(`/api/businesses/${businessId}`, {

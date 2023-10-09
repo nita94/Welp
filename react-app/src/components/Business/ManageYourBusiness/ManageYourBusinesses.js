@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom"; // Removed 'useParams'
 import { useDispatch, useSelector } from "react-redux";
 import { getBusinesses } from "../../../store/businesses";
 import UpdateBusinessForm from '../UpdateBusinessForm/UpdateBusinessForm';
@@ -8,7 +8,6 @@ import OpenModalButton from "../../Landing/OpenModalButton";
 import CreateBusinessForm from "../CreateBusinessForm/CreateBusinessForm";
 
 const ManageYourBusinesses = () => {
-    const { userId } = useParams(); // Get the user ID from URL params
     const dispatch = useDispatch();
     const businesses = useSelector(state => state.businesses.allBusinesses);
     const user = useSelector(state => state.session.user);
