@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from 'react-router-dom';
 import { getSelectedBusiness } from "../../../store/businesses";
-import UpdateBusinessForm from '../UpdateBusinessForm/UpdateBusinessForm';
-import DeleteBusiness from '../DeleteBusiness/DeleteBusiness';
 import './SingleBusiness.css';
 
 const SingleBusiness = () => {

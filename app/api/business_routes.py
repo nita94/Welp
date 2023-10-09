@@ -45,6 +45,7 @@ def create_business():
 @business_routes.route('/<int:business_id>', methods=['PUT'])
 @login_required
 def update_business(business_id):
+    print(request.get_json())  # Add this line to print the payload in your server logs
     """
     Update a business
     """
