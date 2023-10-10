@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateReview, getReviewsForBusiness } from "../../../store/reviews"; 
-// Update import path as needed
+import { updateReview } from "../../../store/reviews"; 
 import './UpdateReviewForm.css'; 
 
 const UpdateReviewForm = ({ review, businessId }) => { 
@@ -23,11 +22,11 @@ const UpdateReviewForm = ({ review, businessId }) => {
         };
 
         try {
-            const res = await dispatch(updateReview(payload, review.id));
-            if (res) {
-                dispatch(getReviewsForBusiness(businessId));
-                // Optionally close modal if you're using one
+            const updatedReview = await dispatch(updateReview(review.id, payload));
+            if (!updatedReview) {
+                throw new Error("An error occurred while updating the review.");
             }
+            // Optionally close modal or navigate if you're using React-Router
         } catch(err) {
             console.error(err);
             setErrors([...errors, "An error occurred while updating the review."]);
@@ -35,31 +34,40 @@ const UpdateReviewForm = ({ review, businessId }) => {
     };
 
     return (
-        <>
-            <div>Update a review</div>
+        <div className="update-review-container">
+            <h2>Update a Review</h2>
             <form onSubmit={handleUpdateReview}>
-                <ul>{errors.map((error, idx) => (<li key={idx}>{error}</li>))}</ul>
-                <label>Content</label>
-                <textarea
-                    value={content}
-                    required
-                    onChange={(e) => setContent(e.target.value)}
-                />
-                <label>Rating:</label>
-                {[1, 2, 3, 4, 5].map(star => (
-                    <span
-                        key={star}
-                        className={rating >= star ? 'full' : 'blank'}
-                        onMouseEnter={() => setHoverRating(star)}
-                        onMouseLeave={() => setHoverRating(rating)}
-                        onClick={() => setRating(star)}
-                    >
-                        <i className="fa fa-star"></i>
-                    </span>
-                ))}
-                <button type="submit">Update Review</button>
+                <ul className="error-list">
+                    {errors.map((error, idx) => (<li key={idx}>{error}</li>))}
+                </ul>
+                <div className="form-group">
+                    <label className="label">Rating:</label>
+                    <div className="star-rating">
+                        {[1, 2, 3, 4, 5].map(star => (
+                            <span
+                                key={star}
+                                className={`star ${star <= (hoverRating || rating) ? 'filled' : ''}`}
+                                onMouseEnter={() => setHoverRating(star)}
+                                onMouseLeave={() => setHoverRating(0)}
+                                onClick={() => setRating(star)}
+                            >
+                                ★
+                            </span>
+                        ))}
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label className="label">Your Review:</label>
+                    <textarea
+                        className="text-area"
+                        value={content}
+                        required
+                        onChange={(e) => setContent(e.target.value)}
+                    />
+                </div>
+                <button className="submit-button" type="submit">Update Review</button>
             </form>
-        </>
+        </div>
     );
 };
 
