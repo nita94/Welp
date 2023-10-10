@@ -78,25 +78,35 @@ export const getReviewsForBusiness = (businessId) => async (dispatch) => {
 };
 
 
-export const createReview = (review) => async (dispatch) => {
+export const createReview = (businessId, review) => async (dispatch) => {
     try {
+        // Set loading to true to indicate an ongoing API call
         dispatch(setReviewLoading(true));
-        const res = await fetch('/api/reviews', {
+        
+        // Send a POST request to create a new review for the specified business
+        const res = await fetch(`/api/reviews/${businessId}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(review)
+            body: JSON.stringify(review)  // Ensure review object contains necessary data
+            credentials: 'include', // Add this line
         });
+
+        // Check the response from the server
         if (res.ok) {
+            // If it's okay, parse the JSON and dispatch it to the Redux store
             const newReview = await res.json();
             dispatch(getOneReview(newReview));
             return newReview;
         } else {
+            // If there's an issue (e.g., validation error), throw an error
             const errorData = await res.json();
             throw new Error('Error creating review: ' + errorData);
         }
     } catch (error) {
+        // Dispatch an error action to the Redux store if any error occurs
         dispatch(setReviewError(error.toString()));
     } finally {
+        // Set loading to false after API call is finished
         dispatch(setReviewLoading(false));
     }
 };

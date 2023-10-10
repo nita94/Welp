@@ -24,9 +24,11 @@ const CreateReviewForm = ({ businessId }) => {
         };
 
         try {
-            const res = await dispatch(createReview(payload, businessId));
-            if (res) {
+            const newReview = await dispatch(createReview(businessId, payload));  // Adjusted line here
+            if (newReview) {  // Adjusted line here, checking if newReview exists
                 history.push(`/businesses/${businessId}`);
+            } else {
+                setErrors([...errors, "An error occurred while creating the review."]);
             }
         } catch (err) {
             console.error(err);

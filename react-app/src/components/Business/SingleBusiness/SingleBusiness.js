@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getSelectedBusiness } from "../../../store/businesses";
 import { getReviews } from "../../../store/reviews";
 import DeleteReview from "../../Reviews/DeleteReview/DeleteReview";
+import UpdateReviewForm from "../../Reviews/UpdateReviewForm/UpdateReviewForm"; // Import UpdateReviewForm
 import './SingleBusiness.css';
 
 const SingleBusiness = () => {
@@ -13,8 +14,12 @@ const SingleBusiness = () => {
     const business = useSelector(state => state.businesses.allBusinesses[String(businessId)]);
     const reviewsList = useSelector(state => state.reviews.reviewsList);
 
-    // State to control the visibility of DeleteReview
+    // State to control the visibility of DeleteReview and UpdateReview
     const [showDeleteReview, setShowDeleteReview] = useState(null);
+    const [showUpdateReview, setShowUpdateReview] = useState(null);
+
+    // State to track the selected review for update
+    const [selectedReviewForUpdate, setSelectedReviewForUpdate] = useState(null);
 
     useEffect(() => {
         if (!business) {
@@ -53,15 +58,21 @@ const SingleBusiness = () => {
                                 <p>{review.content}</p>
                                 <p>Rating: {review.rating}</p>
                                 <div className="review-buttons">
-                                    {/* Render DeleteReview component conditionally */}
+                                    <button onClick={() => setShowUpdateReview(review.id)}>Update Review</button>
+                                    {/* Render DeleteReview and UpdateReview components conditionally */}
                                     {showDeleteReview === review.id ? (
                                         <DeleteReview
                                             review={review}
                                             onHide={() => setShowDeleteReview(null)}
                                         />
-                                    ) : (
-                                        <button onClick={() => setShowDeleteReview(review.id)}>Delete Review</button>
-                                    )}
+                                    ) : null}
+
+                                    {showUpdateReview === review.id ? (
+                                        <UpdateReviewForm
+                                            review={review}
+                                            businessId={businessId}
+                                        />
+                                    ) : null}
                                 </div>
                             </div>
                         ))
