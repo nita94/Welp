@@ -1,47 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from 'react-router-dom';
 import { getSelectedBusiness } from "../../../store/businesses";
 import { getReviews } from "../../../store/reviews";
 import DeleteReview from "../../Reviews/DeleteReview/DeleteReview";
 import UpdateReviewForm from "../../Reviews/UpdateReviewForm/UpdateReviewForm";
-import OpenModalButton from "../../Landing/OpenModalButton"; // Correct relative path
-import CreateReviewForm from "../../Reviews/CreateReviewForm/CreateReviewForm"; // Correct relative path
+import OpenModalButton from "../../Landing/OpenModalButton";
+import CreateReviewForm from "../../Reviews/CreateReviewForm/CreateReviewForm";
 
 import './SingleBusiness.css';
 
 const SingleBusiness = () => {
     const dispatch = useDispatch();
     const { businessId } = useParams();
-
-    const user = useSelector(state => state.session.user); // Assuming you have this in your Redux state
+    const user = useSelector(state => state.session.user);
     const business = useSelector(state => state.businesses.singleBusiness);
-    const reviewsList = useSelector(state => state.reviews.reviews);
+    const reviews = Object.values(useSelector(state => state.reviews.allReviews)); // Adjust based on your Redux state
 
-    const [showUpdateReview, setShowUpdateReview] = useState(null);
-    const [showDeleteReview, setShowDeleteReview] = useState(null);
-
-    // Debugging step A: Log businessId and fetched reviews
     useEffect(() => {
         console.log("Business ID in SingleBusiness:", businessId);
         dispatch(getSelectedBusiness(businessId));
         dispatch(getReviews(businessId));
-
-        // Log fetched reviews
-        console.log("Fetched reviews:", reviewsList);
-    }, [dispatch, businessId]);
-
-    const reviewsArray = Object.values(reviewsList || {}); // Add fallback to an empty object
-
-    // Debugging step B: Log and render reviews
-    console.log("Rendering reviews:", reviewsArray);
+        console.log("Fetched reviews:", reviews);
+    }, [dispatch, businessId, reviews]); // Ensure dependencies are correct
 
     if (!business) {
         return <p>Error: Business data not loaded. Check the businessId: {businessId} and Redux state.</p>;
     }
 
     const businessOwner = user && business.user_id === user.id;
-    const reviewOwner = user && reviewsArray.find((review) => review.user_id === user.id);
+    const reviewOwner = user && reviews.find((review) => review.user_id === user.id);
 
     return (
         <div className="single-business-container">
@@ -55,22 +43,23 @@ const SingleBusiness = () => {
 
             {user && !(businessOwner || reviewOwner) && (
                 <div>
-                    {/* Replace with your modal opening logic if different */}
-                    <OpenModalButton buttonText="Add Review" modalComponent={<CreateReviewForm businessId={businessId} />} />
+                    <OpenModalButton 
+                        buttonText="Add Review" 
+                        modalComponent={<CreateReviewForm businessId={businessId} />} 
+                    />
                 </div>
             )}
 
             <h3>Reviews</h3>
             <div className="reviews-container">
-                {reviewsArray.length > 0 ? (
-                    reviewsArray.map(review => (
+                {reviews.length > 0 ? (
+                    reviews.map(review => (
                         <div key={review.id} className="review">
                             <p>{review.content}</p>
                             <p>Rating: {review.rating}</p>
                             <div className="review-buttons">
                                 {user && (user.id === review.user_id) && (
                                     <>
-                                        {/* Replace with your modal opening logic if different */}
                                         <OpenModalButton
                                             buttonText='Edit Review'
                                             modalComponent={<UpdateReviewForm review={review}/>}

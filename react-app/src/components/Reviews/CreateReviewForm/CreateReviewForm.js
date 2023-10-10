@@ -1,55 +1,46 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createReview } from '../../../store/reviews';  // Assuming store is in src/store
+import { createReview } from '../../../store/reviews'; // Assuming store is in src/store
 import './CreateReviewForm.css';
 
 const CreateReviewForm = ({ businessId }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const userId = useSelector(state => state.session.user.id);
+    const userId = useSelector((state) => state.session.user.id);
     const [content, setContent] = useState('');
     const [rating, setRating] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
-        console.log('Business ID in CreateReviewForm:', businessId);  // Debugging line
+        console.log('Business ID in CreateReviewForm:', businessId); // Debugging line
     }, [businessId]);
 
     const handleCreateReview = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent the default form submission
 
         const reviewData = {
             content,
             rating,
             user_id: userId,
-            business_id: businessId,
+            business_id: businessId, // Ensure businessId is being passed correctly
         };
 
-        console.log('Submitting review:', reviewData);  // Debugging line
+        console.log('Submitting review:', reviewData); // Debugging line
 
         try {
-            console.log('Creating review for businessId:', businessId);  // Debugging line
-            console.log('Review data:', reviewData);  // Debugging line
-            const response = await dispatch(createReview(businessId, reviewData));
+            console.log('Creating review for businessId:', businessId); // Debugging line
+            console.log('Review data:', reviewData); // Debugging line
+            const data = await dispatch(createReview(reviewData, businessId));
             // Log the response status and status text
-            console.log('Response Status:', response.status);
-            console.log('Response Status Text:', response.statusText);
+            console.log('Review Data:', data);
 
-            if (response.ok) {
-                const review = await response.json();
-                console.log('Review created successfully:', review);  // Debugging line
-                history.push(`/businesses/${businessId}`);
-            } else {
-                const error = await response.json();
-                console.error('Error creating review:', error);  // Debugging line
-                setErrors([...errors, "An error occurred while creating the review."]);
-            }
+            history.push(`/businesses/${businessId}`);
         } catch (error) {
             // Log any errors that occur with the fetch call itself (e.g., network errors)
-            console.error('Fetch Error:', error);  // Debugging line
-            setErrors([...errors, "An error occurred while creating the review."]);
+            console.error('Fetch Error:', error); // Debugging line
+            setErrors([...errors, 'An error occurred while creating the review.']);
         }
     };
 
@@ -59,13 +50,15 @@ const CreateReviewForm = ({ businessId }) => {
             <form onSubmit={handleCreateReview}>
                 <ul className="error-list">
                     {errors.map((error, idx) => (
-                        <li key={idx} className="error">{error}</li>
+                        <li key={idx} className="error">
+                            {error}
+                        </li>
                     ))}
                 </ul>
                 <div className="form-group">
                     <label className="label">Rating:</label>
                     <div className="star-rating">
-                        {[1, 2, 3, 4, 5].map(star => (
+                        {[1, 2, 3, 4, 5].map((star) => (
                             <span
                                 key={star}
                                 className={`star ${star <= (hoverRating || rating) ? 'filled' : ''}`}
@@ -87,7 +80,9 @@ const CreateReviewForm = ({ businessId }) => {
                         onChange={(e) => setContent(e.target.value)}
                     />
                 </div>
-                <button className="submit-button" type="submit">Submit Review</button>
+                <button className="submit-button" type="submit">
+                    Submit Review
+                </button>
             </form>
         </div>
     );
