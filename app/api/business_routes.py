@@ -41,11 +41,11 @@ def create_business():
             owner_user_id=current_user.id,
             name=form.data['name'],
             address=form.data['address'],
-            city=form.data['city'],  # Assuming your form and model have a 'city' field
-            state=form.data['state'],  # Assuming your form and model have a 'state' field
+            city=form.data['city'],  
+            state=form.data['state'], 
             description=form.data['description'],
-            hours=form.data['hours'],  # Assuming your form and model have an 'hours' field
-            image_url=form.data['image_url']  # Assuming your form and model have an 'image_url' field
+            hours=form.data['hours'],  
+            image_url=form.data['image_url']  
         )
         db.session.add(new_business)
         db.session.commit()
@@ -57,7 +57,7 @@ def create_business():
 @business_routes.route('/<int:business_id>', methods=['PUT'])
 @login_required
 def update_business(business_id):
-    print(request.get_json())  # Add this line to print the payload in your server logs
+    print(request.get_json())  
     """
     Update a business
     """
