@@ -11,8 +11,16 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin-right: 10px; /* Add margin to the right for spacing */
+  margin-right: 10px; 
 }
+
+.iconLinks {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-right: 20px;  
+}
+
 
 .profileImage {
   width: 50px;

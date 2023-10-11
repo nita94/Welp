@@ -37,13 +37,13 @@ const Footer = () => {
             <li>
               <h1>Other</h1>
             </li>
-            <li>Coming Soon</li>
             <li>AWS S3</li>
+            <li>Coming Soon</li>
           </ul>
         </div>
 
         <div className="footer-links">
-          Copyright © 2023{" "}
+          Copyright Nick T© 2023{" "}
           <h1>
             Welp
             <i className="fa-brands fa-yelp"></i>

@@ -17,7 +17,7 @@ function Navigation() {
     <ul className="navbar">
       <NavLink className="homeNavLink" exact to="/">
         <h1 className="home">
-          <img src="images/welp_logo.png" alt="Welp" className="logo" /> Welp
+        <img src={process.env.PUBLIC_URL + '/images/welp_logo.png'} alt="Welp" className="logo" /> Welp
         </h1>
         <FontAwesomeIcon icon={["fab", "yelp"]} style={{ color: "#ff1a1a" }} />
       </NavLink>
@@ -36,7 +36,7 @@ function Navigation() {
         </NavLink>
       </div>
       <div className="iconLinks">
-        <a id="fabLink1" href="https://github.com/nita94/Welp" target="_blank">
+        <a id="fabLink1" href="https://github.com/nita94" target="_blank">
           <FontAwesomeIcon icon={faGithub} size="2x" style={{ color: "#000" }} />
         </a>
         <a id="fabLink2" href="https://www.linkedin.com/in/nicholas-tan-8046a5159/" target="_blank">

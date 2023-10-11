@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app  # Add current_app
 from flask_login import login_required, current_user
 from app.models import Business, db
 from app.forms.business_form import BusinessForm
@@ -34,16 +34,24 @@ def create_business():
     form = BusinessForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        payload = request.get_json()
+        current_app.logger.info(f"Received payload: {payload}")
+
         new_business = Business(
             owner_user_id=current_user.id,
             name=form.data['name'],
             address=form.data['address'],
+            city=form.data['city'],  # Assuming your form and model have a 'city' field
+            state=form.data['state'],  # Assuming your form and model have a 'state' field
             description=form.data['description'],
+            hours=form.data['hours'],  # Assuming your form and model have an 'hours' field
+            image_url=form.data['image_url']  # Assuming your form and model have an 'image_url' field
         )
         db.session.add(new_business)
         db.session.commit()
         return new_business.to_dict()
     return {'errors': form.errors}, 400
+
 
 
 @business_routes.route('/<int:business_id>', methods=['PUT'])
