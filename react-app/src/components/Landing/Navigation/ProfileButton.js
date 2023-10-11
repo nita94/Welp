@@ -1,14 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../../../store/session";
-import OpenModalButton from '../OpenModalButton'; // Update the import path
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import * as sessionActions from "../../../store/session";
+import "./profilebutton.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faCircleUser, faBookmark, faUserPlus, faGear, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faUser as faUserRegular } from "@fortawesome/free-regular-svg-icons";
 
 function ProfileButton({ user }) {
+  const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const ulRef = useRef();
+  const history = useHistory();
 
   const openMenu = () => {
     if (showMenu) return;
@@ -18,10 +22,8 @@ function ProfileButton({ user }) {
   useEffect(() => {
     if (!showMenu) return;
 
-    const closeMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
-        setShowMenu(false);
-      }
+    const closeMenu = () => {
+      setShowMenu(false);
     };
 
     document.addEventListener("click", closeMenu);
@@ -29,45 +31,55 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const handleLogout = (e) => {
+  const logout = (e) => {
     e.preventDefault();
-    dispatch(logout());
+    dispatch(sessionActions.logout()).then(() => {
+      history.push("/SeeYouSoon");
+    });
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-  const closeMenu = () => setShowMenu(false);
-
   return (
-    <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      <ul className={ulClassName} ref={ulRef}>
-        {user ? (
-          <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={handleLogout}>Log Out</button>
-            </li>
-          </>
+    <div className="profile-wrapper">
+      <div className="userIcon" onClick={openMenu}>
+        {sessionUser?.avatar ? (
+          <div
+            className="profileImage"
+            style={{
+              backgroundImage: `url(${sessionUser.avatar})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          ></div>
         ) : (
-          <>
-            <OpenModalButton
-              buttonText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
-
-            <OpenModalButton
-              buttonText="Sign Up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
-          </>
+          <div className="profileImage">
+            <i className="fa-solid fa-user" style={{ fontSize: "25px", opacity: "0.6" }} />
+          </div>
         )}
-      </ul>
-    </>
+      </div>
+      {showMenu && (
+        <ul className="profile-dropdown">
+          <li>{user.firstName}</li>
+
+          <li>
+            <i className="fa-regular fa-circle-user"></i>About Me
+          </li>
+          <li>
+            <i className="fa-regular fa-bookmark" />
+            My Collections
+          </li>
+          <li>
+            <i className="fa-solid fa-user-plus"></i>Find Friends
+          </li>
+          <li>
+            <i className="fa-solid fa-gear"></i>Account Settings
+          </li>
+
+          <li className="logoutButton" onClick={logout}>
+            <i className="fa-solid fa-right-from-bracket"></i>Log Out
+          </li>
+        </ul>
+      )}
+    </div>
   );
 }
 
