@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { getBusinesses } from '../../../store/businesses';  
 import { Link } from 'react-router-dom';
 import './AllBusinesses.css';
+import './../../../index.css';
 
 const AllBusinesses = () => {
     const dispatch = useDispatch();
@@ -21,6 +22,9 @@ const AllBusinesses = () => {
             {businesses.map(business => (
                 <div className='business-tile-container' key={business.id}>
                     <Link to={`/businesses/${business.id}`}>
+                        {business.image_url && (
+                            <img src={business.image_url} alt={business.name} />
+                        )}
                         <div>{business.name}</div>
                         <div>{business.address}</div>
                     </Link>

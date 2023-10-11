@@ -1,22 +1,9 @@
-.landing-page {
-    font-family: Arial, sans-serif;
-  }
-  
-  .header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
   
   .logo {
     max-width: 40vw; /* Adjust the percentage of viewport width as needed */
     height: auto; /* Maintain the aspect ratio */
   }
-  
-  
+
   
   .navigation ul {
     list-style-type: none;
@@ -60,28 +47,77 @@
   flex-direction: column;
 }
 
+/* Business Grid */
 .business-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(5, 300px); 
+  gap: 15px;
+  justify-content: center;
+  padding-bottom: 20px;  /* Space between the grid and the footer */
 }
 
-  
-  .business {
-    width: 300px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-  
-  .business img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .business h3, .business p {
-    margin: 10px;
-  }
-  
-  
+/* Business Container */
+.business {
+  width: 300px;
+  height: 350px; /* Fixed height to standardize container size */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* Distribute space evenly within the container */
+}
+
+/* Business Image */
+.business img {
+  width: 100%;
+  height: 200px; /* Set a fixed height */
+  object-fit: cover; /* Ensure images cover the area without distortion */
+}
+
+/* Business Text */
+.business h3, .business p, .star-rating {
+  margin: 5px 10px;  
+  line-height: 1.2;
+  text-align: center; /* Center text */
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0;
+}
+
+.star {
+  cursor: pointer;
+  color: #ccc;
+  font-size: 20px; /* Adjust as needed */
+  transition: color 200ms;
+}
+
+.star.filled {
+  color: #ffd700;
+}
+
+/* ... Other CSS ... */
+
+/* Ensure that the navigation CSS only affects the navigation within the landing page */
+.landing-page .navigation a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.landing-page .navigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.landing-page .navigation li {
+  margin-right: 20px;
+}
+
+/* ... Rest of the CSS ... */

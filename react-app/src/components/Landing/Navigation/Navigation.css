@@ -11,7 +11,7 @@
 }
 
 .navbar h1 {
-  font-size: 14px; /* Adjust font size */
+  font-size: 150%; /* Adjust font size */
   font-weight: 600;
   color: black; /* Change color to black */
   margin: 0; /* Remove margin */
@@ -84,6 +84,10 @@
 .nav-button.business {
   background-color: white; /* Set the background color for business buttons */
   color: black; /* Set the text color for business buttons */
+}
+
+.homeNavLink {
+  text-decoration: none; /* Remove underline */
 }
 
 .iconLinks {

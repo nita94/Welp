@@ -4,6 +4,9 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as sessionActions from "../../../store/session";
 import "./profilebutton.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faCircleUser, faBookmark, faUserPlus, faGear, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faUser as faUserRegular } from "@fortawesome/free-regular-svg-icons";
 
 function ProfileButton({ user }) {
   const sessionUser = useSelector((state) => state.session.user);

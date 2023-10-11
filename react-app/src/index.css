@@ -1,3 +1,8 @@
+/* Set the global font-family */
+body {
+    font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 .landing-page {
     text-align: center;
 }
@@ -5,4 +10,4 @@
 .standardized-image {
     max-width: 50%; /* Set the maximum width to 100% of the container */
     max-height: 50%; /* Set the maximum height to 100% of the container */
-  }
+}
