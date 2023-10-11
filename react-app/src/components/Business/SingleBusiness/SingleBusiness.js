@@ -7,7 +7,7 @@ import DeleteReview from "../../Reviews/DeleteReview/DeleteReview";
 import UpdateReviewForm from "../../Reviews/UpdateReviewForm/UpdateReviewForm";
 import OpenModalButton from "../../Landing/OpenModalButton";
 import CreateReviewForm from "../../Reviews/CreateReviewForm/CreateReviewForm";
-
+import '../../../index.css';
 import './SingleBusiness.css';
 
 const SingleBusiness = () => {
@@ -22,7 +22,8 @@ const SingleBusiness = () => {
         dispatch(getSelectedBusiness(businessId));
         dispatch(getReviews(businessId));
         console.log("Fetched reviews:", reviews);
-    }, [dispatch, businessId, reviews]); // Ensure dependencies are correct
+    }, [dispatch, businessId]); // Remove 'reviews' from the dependency array
+    
 
     if (!business) {
         return <p>Error: Business data not loaded. Check the businessId: {businessId} and Redux state.</p>;
@@ -36,11 +37,17 @@ const SingleBusiness = () => {
             <h2>{business.name}</h2>
             <div>{business.address}</div>
             <div>{business.description}</div>
+            
+            {/* Display the business image */}
+            {business.image_url && (
+                <img src={business.image_url} alt={business.name} className="business-image standardized-image" />
+                
+            )}
 
             <Link to={`/businesses/${businessId}/managebusiness`} className="manage-business-button">
                 Manage Your Business
             </Link>
-
+            
             {user && !(businessOwner || reviewOwner) && (
                 <div>
                     <OpenModalButton 
