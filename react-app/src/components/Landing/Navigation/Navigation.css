@@ -1,7 +1,136 @@
-.profile-dropdown {
-  position: absolute;
+/* frontend/src/components/Navigation/Navigation.css */
+
+.navbar {
+  width: 100%;
+  height: 4.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; /* Increase padding for spacing */
+  background-color: var(--navbarBackground);
 }
 
-.hidden {
-  display: none;
+.navbar h1 {
+  font-size: 14px; /* Adjust font size */
+  font-weight: 600;
+  color: black; /* Change color to black */
+  margin: 0; /* Remove margin */
+  display: flex; /* Display h1 as a flex container */
+  align-items: center; /* Center the content vertically */
+}
+
+/* Adjust the logo image styles */
+.navbar img {
+  width: 32px; /* Set the width of the logo */
+  margin-right: 10px; /* Add margin to separate from text */
+}
+
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  flex-grow: 1; /* Allow it to grow and take available space */
+  max-width: 300px; /* Set a maximum width for the search bar */
+}
+
+/* Adjust search input width */
+.search-bar-container input[type="text"] {
+  width: 100%;
+  height: var(--inputHeight);
+  border: 1px solid rgba(235, 235, 235, 1); /* Use Yelp's border color */
+  border-radius: 4px;
+  padding: 0 10px; /* Adjust padding */
+  color: rgba(0, 0, 0, 1); /* Use black color */
+  font-weight: 600; /* Use Yelp's font weight */
+}
+
+/* Adjust search button width */
+.search-bar-container button {
+  width: 100px;
+  height: var(--inputHeight);
+  border: none;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+/* Update button styles for even spacing */
+.nav-buttons {
+  display: flex;
+  align-items: center; /* Center buttons vertically */
+  gap: 20px; /* Adjust gap between buttons */
+}
+
+/* Adjust button styles */
+.nav-button {
+  height: var(--inputHeight); /* Set button height */
+  border: none;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+/* Add specific background color for business buttons */
+.nav-button.business {
+  background-color: white; /* Set the background color for business buttons */
+  color: black; /* Set the text color for business buttons */
+}
+
+.iconLinks {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Adjust gap between icons */
+}
+
+.iconLinks a {
+  color: white; /* Use white text color */
+  text-decoration: none; /* Remove underline */
+}
+
+/* Adjust icon styles as needed */
+.iconLinks .fa-brands {
+  font-size: 20px; /* Adjust icon size */
+  color: rgba(0, 0, 0, 1); /* Use black color */
+  background-color: rgba(235, 235, 235, 1); /* Use Yelp's background color */
+  padding: 5px; /* Adjust padding */
+  border-radius: 50%;
+  text-align: center; /* Center the icon */
+  line-height: 0; /* Remove line height */
+}
+
+.iconLinks .fa-brands:hover {
+  transform: scale(1.2);
+  transition: all 0.6s ease-out;
+}
+
+/* Additional styles for login and sign up buttons as needed */
+.login,
+.signUp {
+  height: var(--inputHeight); /* Use the same height as the input */
+  border: none;
+  border-radius: 4px;
+  background-color: black; /* Use black background */
+  color: white; /* Use white text color */
+  font-weight: 600; /* Use Yelp's font weight */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none; /* Remove underline */
+}
+
+.login:hover,
+.signUp:hover {
+  background-color: #c7c6c6;
+  transition: all ease-in-out 0.4s;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
 }
