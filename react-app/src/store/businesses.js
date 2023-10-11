@@ -21,13 +21,17 @@ const removeBusiness = (businessId) => ({
 
 // THUNKS
 export const getBusinesses = () => async (dispatch) => {
-    const res = await fetch('/api/businesses');
-
-    if (res.ok) {
-        const { businesses } = await res.json();
-        dispatch(getAllBusinesses(businesses));
-    } else {
-        console.error('Failed to fetch businesses');
+    try {
+        const res = await fetch('/api/businesses');
+        if (res.ok) {
+            const { businesses } = await res.json();
+            console.log('Businesses data received:', businesses); // Debug log
+            dispatch(getAllBusinesses(businesses));
+        } else {
+            console.error('Failed to fetch businesses');
+        }
+    } catch (error) {
+        console.error('Error fetching businesses:', error);
     }
 };
 
