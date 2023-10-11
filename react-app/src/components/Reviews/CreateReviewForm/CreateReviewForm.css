@@ -1,13 +1,15 @@
 .star-rating {
-    display: flex;
-}
-
-.star {
+    display: inline-block; /* Display stars in a row */
+  }
+  
+  .star {
     cursor: pointer;
-    color: lightgray;
+    color: #d4d4d4; /* Light gray star outline */
     font-size: 24px;
-}
-
-.star.filled {
-    color: gold;
-}
+    margin-right: 4px; /* Add some spacing between stars */
+  }
+  
+  .star.filled {
+    color: #f8d05a; /* Yelp's gold color for filled stars */
+  }
+  

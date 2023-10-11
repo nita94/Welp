@@ -15,11 +15,15 @@ def get_all_businesses():
 
 @business_routes.route('/<int:business_id>')
 def get_one_business(business_id):
-    """
-    Get one business
-    """
     business = Business.query.get(business_id)
-    return business.to_dict()
+    if business:
+        print(f"Business found: {business.to_dict()}")  # Debug print
+        return business.to_dict()
+    else:
+        print(f"No business found for id: {business_id}")  # Debug print
+        return jsonify({"error": "Business not found"}), 404
+
+
 
 @business_routes.route('', methods=['POST'])
 @login_required
@@ -30,21 +34,22 @@ def create_business():
     form = BusinessForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        data = form.data
         new_business = Business(
             owner_user_id=current_user.id,
-            name=data['name'],
-            address=data['address'],
-            description=data['description'],
+            name=form.data['name'],
+            address=form.data['address'],
+            description=form.data['description'],
         )
         db.session.add(new_business)
         db.session.commit()
         return new_business.to_dict()
     return {'errors': form.errors}, 400
 
+
 @business_routes.route('/<int:business_id>', methods=['PUT'])
 @login_required
 def update_business(business_id):
+    print(request.get_json())  # Add this line to print the payload in your server logs
     """
     Update a business
     """

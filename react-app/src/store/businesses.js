@@ -4,19 +4,19 @@ const GET_ONE_BUSINESS = 'businesses/GET_ONE_BUSINESS';
 const REMOVE_BUSINESS = 'businesses/REMOVE_BUSINESS';
 
 // ACTION CREATORS
-const getAllBusinesses = (allBusinesses) => ({
+const getAllBusinesses = (businesses) => ({
     type: GET_ALL_BUSINESSES,
-    payload: allBusinesses
+    businesses
 });
 
 const getSingleBusiness = (business) => ({
     type: GET_ONE_BUSINESS,
-    payload: business
+    business
 });
 
 const removeBusiness = (businessId) => ({
     type: REMOVE_BUSINESS,
-    payload: businessId
+    businessId
 });
 
 // THUNKS
@@ -24,88 +24,96 @@ export const getBusinesses = () => async (dispatch) => {
     const res = await fetch('/api/businesses');
 
     if (res.ok) {
-        const data = await res.json();
-        dispatch(getAllBusinesses(data.businesses)); // Ensure your API sends businesses in an object like { businesses: [...] }
+        const { businesses } = await res.json();
+        dispatch(getAllBusinesses(businesses));
     } else {
-        console.log('No businesses found');
+        console.error('Failed to fetch businesses');
     }
 };
 
-
 export const getSelectedBusiness = (businessId) => async (dispatch) => {
-    const res = await fetch(`/api/businesses/${businessId}`)
+    console.log(`Fetching business with id: ${businessId}`);  // Debug log
+    const res = await fetch(`/api/businesses/${businessId}`);
 
     if (res.ok) {
-        const data = await res.json()
-        dispatch(getSingleBusiness(data))
+        const business = await res.json();
+        console.log('Business data received:', business);  // Debug log
+        dispatch(getSingleBusiness(business));
     } else {
-        console.log('No business found')
+        console.error('Failed to fetch business');
     }
-}
+};
+
 
 export const createBusiness = (business) => async (dispatch) => {
     const res = await fetch('/api/businesses', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(business)
-    })
+    });
+
     if (res.ok) {
-        const data = await res.json()
-        dispatch(getSingleBusiness(data.id))
-        return data
+        const newBusiness = await res.json();
+        dispatch(getSingleBusiness(newBusiness));
+        return newBusiness;
+    } else {
+        console.error('Failed to create business');
     }
-}
+};
 
 export const updateBusiness = (business, businessId) => async (dispatch) => {
     const res = await fetch(`/api/businesses/${businessId}`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(business)
-    })
-    console.log(res)
-    console.log('BUSINESS ID', businessId)
+    });
+
     if (res.ok) {
-        const data = await res.json()
-        dispatch(getSelectedBusiness(businessId))
-        return data
+        const updatedBusiness = await res.json();
+        dispatch(getSelectedBusiness(updatedBusiness.id));
+        return updatedBusiness;
     } else {
-        console.log('errors')
+        console.error('Failed to update business');
+        return null;
     }
-}
+};
 
 export const deleteBusiness = (businessId) => async (dispatch) => {
     const res = await fetch(`/api/businesses/${businessId}`, {
-        method: 'DELETE',
-    })
+        method: 'DELETE'
+    });
+
     if (res.ok) {
-        dispatch(removeBusiness(businessId))
-        return businessId
+        dispatch(removeBusiness(businessId));
+    } else {
+        console.error('Failed to delete business');
     }
-}
+};
 
 // INITIAL STATE
-const initialState = { allBusinesses: {}, singleBusiness: {} };
+const initialState = { allBusinesses: {}, singleBusiness: null };
 
 // REDUCER
 export default function businessReducer(state = initialState, action) {
+    console.log('Action received in reducer:', action);  // Debug log
     switch (action.type) {
         case GET_ALL_BUSINESSES:
-            const allBusinesses = {};
-            action.payload.forEach(business => {
-                allBusinesses[business.id] = business;
-            });
             return { 
                 ...state, 
-                allBusinesses 
+                allBusinesses: action.businesses.reduce((acc, business) => {
+                    acc[business.id] = business;
+                    return acc;
+                }, {}) 
             };
         case GET_ONE_BUSINESS:
+            console.log('Updating single business:', action.business);
             return { 
                 ...state, 
-                singleBusiness: action.payload 
+                singleBusiness: action.business 
             };
         case REMOVE_BUSINESS:
             const newAllBusinesses = { ...state.allBusinesses };
-            delete newAllBusinesses[action.payload];
+            delete newAllBusinesses[action.businessId];
             return {
                 ...state,
                 allBusinesses: newAllBusinesses

@@ -27,6 +27,7 @@ def get_all_reviews(business_id):
 @review_routes.route('/<int:business_id>', methods=['POST'])
 @login_required
 def create_review(business_id):
+    print("Received POST request for business_id: {business_id}")  # Debugging line
     """
     Create a new review
     """
@@ -42,7 +43,8 @@ def create_review(business_id):
         db.session.add(new_review)
         db.session.commit()
         return new_review.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400  # Ensure errors are returned as JSON
+
 
 @review_routes.route('/<int:review_id>', methods=['PUT'])
 @login_required

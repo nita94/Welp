@@ -2,47 +2,82 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from 'react-router-dom';
 import { getSelectedBusiness } from "../../../store/businesses";
-import UpdateBusinessForm from '../UpdateBusinessForm/UpdateBusinessForm';
-import DeleteBusiness from '../DeleteBusiness/DeleteBusiness';
+import { getReviews } from "../../../store/reviews";
+import DeleteReview from "../../Reviews/DeleteReview/DeleteReview";
+import UpdateReviewForm from "../../Reviews/UpdateReviewForm/UpdateReviewForm";
+import OpenModalButton from "../../Landing/OpenModalButton";
+import CreateReviewForm from "../../Reviews/CreateReviewForm/CreateReviewForm";
+
 import './SingleBusiness.css';
 
 const SingleBusiness = () => {
     const dispatch = useDispatch();
     const { businessId } = useParams();
-
-    // Ensure businessId is a string and fetch the business data from the state
-    const business = useSelector(state => state.businesses.allBusinesses[String(businessId)]);
+    const user = useSelector(state => state.session.user);
+    const business = useSelector(state => state.businesses.singleBusiness);
+    const reviews = Object.values(useSelector(state => state.reviews.allReviews)); // Adjust based on your Redux state
 
     useEffect(() => {
-        // Fetch business data if not available
-        if (!business) {
-            dispatch(getSelectedBusiness(businessId));
-        }
-    }, [dispatch, businessId, business]);
+        console.log("Business ID in SingleBusiness:", businessId);
+        dispatch(getSelectedBusiness(businessId));
+        dispatch(getReviews(businessId));
+        console.log("Fetched reviews:", reviews);
+    }, [dispatch, businessId, reviews]); // Ensure dependencies are correct
 
-    // Handle loading state
     if (!business) {
-        return <p>Loading...</p>;
+        return <p>Error: Business data not loaded. Check the businessId: {businessId} and Redux state.</p>;
     }
 
-    // Your render logic here
-    return (
-        <>
-            <div className="single-business-container">
-                <h2>{business.name}</h2>
-                <div>{business.address}</div>
-                <div>{business.description}</div>
+    const businessOwner = user && business.user_id === user.id;
+    const reviewOwner = user && reviews.find((review) => review.user_id === user.id);
 
-                {/* Uncomment the below lines when UpdateBusinessForm and DeleteBusiness are implemented */}
-                {/* <UpdateBusinessForm business={business} />
-                <DeleteBusiness businessId={business.id} /> */}
-                
-                {/* Add a button to manage the business */}
-                <Link to={`/businesses/${businessId}/managebusiness`} className="manage-business-button">
-                    Manage Your Business
-                </Link>
+    return (
+        <div className="single-business-container">
+            <h2>{business.name}</h2>
+            <div>{business.address}</div>
+            <div>{business.description}</div>
+
+            <Link to={`/businesses/${businessId}/managebusiness`} className="manage-business-button">
+                Manage Your Business
+            </Link>
+
+            {user && !(businessOwner || reviewOwner) && (
+                <div>
+                    <OpenModalButton 
+                        buttonText="Add Review" 
+                        modalComponent={<CreateReviewForm businessId={businessId} />} 
+                    />
+                </div>
+            )}
+
+            <h3>Reviews</h3>
+            <div className="reviews-container">
+                {reviews.length > 0 ? (
+                    reviews.map(review => (
+                        <div key={review.id} className="review">
+                            <p>{review.content}</p>
+                            <p>Rating: {review.rating}</p>
+                            <div className="review-buttons">
+                                {user && (user.id === review.user_id) && (
+                                    <>
+                                        <OpenModalButton
+                                            buttonText='Edit Review'
+                                            modalComponent={<UpdateReviewForm review={review}/>}
+                                        />
+                                        <OpenModalButton
+                                            buttonText='Delete Review'
+                                            modalComponent={<DeleteReview review={review}/>}
+                                        />
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <p>No reviews available.</p>
+                )}
             </div>
-        </>
+        </div>
     );
 };
 

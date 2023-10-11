@@ -54,15 +54,16 @@ const LandingPage = () => {
         
         <section className="featured-businesses">
           <h2>Your Next Review Awaits</h2>
-          
-          {businessesArray.map(business => (
-            <article className="business" key={business.id}>
-              <img src={business.image_url} alt={business.name} />
-              <h3>
-                <Link to={`/businesses/${business.id}`}>{business.name}</Link>
-              </h3>
-            </article>
-          ))}
+          <div className="business-grid">
+            {businessesArray.map(business => (
+              <article className="business" key={business.id}>
+                <img src={business.image_url} alt={business.name} />
+                <h3>
+                  <Link to={`/businesses/${business.id}`}>{business.name}</Link>
+                </h3>
+              </article>
+            ))}
+          </div>
         </section>
       </main>
     </div>
