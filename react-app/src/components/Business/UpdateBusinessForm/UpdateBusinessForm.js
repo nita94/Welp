@@ -15,6 +15,7 @@ const UpdateBusinessForm = ({ business }) => {
     const [description, setDescription] = useState(business.description);
     const [hours, setHours] = useState(business.hours); // Placeholder new field
     const [city, setCity] = useState(business.city); // Placeholder new field
+    const [state, setState] = useState(business.state); // New "state" field
 
     // Use useEffect to update the local state when Redux state changes
     useEffect(() => {
@@ -24,6 +25,7 @@ const UpdateBusinessForm = ({ business }) => {
             setDescription(updatedBusiness.description);
             setHours(updatedBusiness.hours); // Update for new field
             setCity(updatedBusiness.city); // Update for new field
+            setState(updatedBusiness.state); // Update for new "state" field
         }
     }, [updatedBusiness]);
 
@@ -37,6 +39,7 @@ const UpdateBusinessForm = ({ business }) => {
                 description,
                 hours, // Include new field
                 city, // Include new field
+                state, // Include new "state" field
             },
             businessId: business.id,
         };
@@ -99,6 +102,14 @@ const UpdateBusinessForm = ({ business }) => {
                         type="text"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
+                    />
+                </label>
+                <label>
+                    State
+                    <input
+                        type="text"
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
                     />
                 </label>
                 <button type="submit">Update Business</button>
