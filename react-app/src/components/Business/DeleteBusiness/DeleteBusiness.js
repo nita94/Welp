@@ -34,7 +34,7 @@ const DeleteBusiness = ({ businessId }) => {
                 <>
                     <p>Are you sure you want to delete this business?</p>
                     <button onClick={confirmDelete} className="common-button">Yes, Delete</button>
-                    <button onClick={() => setShowConfirm(false)} className="common-button">Go Back</button>
+                   
                     <button onClick={cancelDelete} className="common-button">Cancel</button>
                 </>
             ) : (
