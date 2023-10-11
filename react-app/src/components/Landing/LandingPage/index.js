@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import './LandingPage.css';
 import OpenModalButton from '../OpenModalButton';
 import Footer from '../Footer/Footer'; // Import the Footer component
+import '../../../index.css'
 
 const AddBusinessModalContent = () => (
   <div>
@@ -33,7 +34,7 @@ const LandingPage = () => {
         <div className="business-grid">
           {businessesArray.map(business => (
             <article className="business" key={business.id}>
-              <img src={business.image_url} alt={business.name} />
+               <img src={business.image_url} alt={business.name} className="standardized-image" />
               <h3>
                 <Link to={`/businesses/${business.id}`}>{business.name}</Link>
               </h3>
