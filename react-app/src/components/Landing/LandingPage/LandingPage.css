@@ -1,86 +1,81 @@
-  
-  .logo {
-    max-width: 40vw; /* Adjust the percentage of viewport width as needed */
-    height: auto; /* Maintain the aspect ratio */
-  }
+/* Your existing CSS ... */
 
-  
-  .navigation ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-  }
-  
-  .navigation li {
-    margin-right: 20px;
-  }
-  
-  .navigation a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .main-content {
-    padding: 20px;
-  }
-  
-  .search-bar {
-    margin-bottom: 30px;
-  }
-  
-  .search-bar input {
-    padding: 10px;
-    width: 80%;
-  }
-  
-  .search-bar button {
-    padding: 10px;
-    width: 15%;
-    margin-left: 5%;
-  }
-  
-/* Add this CSS to LandingPage.css */
+.logo {
+  max-width: 40vw;
+  height: auto;
+}
+
+.navigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navigation li {
+  margin-right: 20px;
+}
+
+.navigation a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.main-content {
+  padding: 20px;
+}
+
+.search-bar {
+  margin-bottom: 30px;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 80%;
+}
+
+.search-bar button {
+  padding: 10px;
+  width: 15%;
+  margin-left: 5%;
+}
+
 .featured-businesses {
   display: flex;
   flex-direction: column;
 }
 
-/* Business Grid */
 .business-grid {
   display: grid;
-  grid-template-columns: repeat(5, 300px); 
+  grid-template-columns: repeat(5, 300px);
   gap: 15px;
   justify-content: center;
-  padding-bottom: 20px;  /* Space between the grid and the footer */
+  padding-bottom: 20px;
 }
 
-/* Business Container */
 .business {
   width: 300px;
-  height: 350px; /* Fixed height to standardize container size */
+  height: 350px;
   border: 1px solid #ddd;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between; /* Distribute space evenly within the container */
+  justify-content: space-between;
 }
 
-/* Business Image */
 .business img {
   width: 100%;
-  height: 200px; /* Set a fixed height */
-  object-fit: cover; /* Ensure images cover the area without distortion */
+  height: 200px;
+  object-fit: cover;
 }
 
-/* Business Text */
 .business h3, .business p, .star-rating {
-  margin: 5px 10px;  
+  margin: 5px 10px;
   line-height: 1.2;
-  text-align: center; /* Center text */
+  text-align: center;
 }
 
 .star-rating {
@@ -92,32 +87,10 @@
 .star {
   cursor: pointer;
   color: #ccc;
-  font-size: 20px; /* Adjust as needed */
+  font-size: 20px;
   transition: color 200ms;
 }
 
 .star.filled {
   color: #ffd700;
 }
-
-/* ... Other CSS ... */
-
-/* Ensure that the navigation CSS only affects the navigation within the landing page */
-.landing-page .navigation a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.landing-page .navigation ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-.landing-page .navigation li {
-  margin-right: 20px;
-}
-
-/* ... Rest of the CSS ... */

@@ -66,24 +66,18 @@
   gap: 20px; /* Adjust gap between buttons */
 }
 
-/* Adjust button styles */
 .nav-button {
-  height: var(--inputHeight); /* Set button height */
-  border: none;
-  border-radius: 4px;
-  background-color: black;
-  color: white;
-  font-weight: 600;
+  /* ... Existing styles ... */
+  padding: 10px 15px; /* Adjust padding to control size */
+}
+
+.nav-button.business {
+  /* ... Existing styles ... */
+  width: 180px; /* Set explicit width */
+  height: 40px; /* Set explicit height */
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-}
-
-/* Add specific background color for business buttons */
-.nav-button.business {
-  background-color: white; /* Set the background color for business buttons */
-  color: black; /* Set the text color for business buttons */
 }
 
 .homeNavLink {
