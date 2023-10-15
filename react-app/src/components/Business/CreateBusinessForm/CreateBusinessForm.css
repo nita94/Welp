@@ -1,9 +1,9 @@
-/* CreateBusiness.css */
+/* CreateBusinessForm.css */
 
 .create-business-form-container {
-    max-width: 400px;
+    max-width: 500px; /* Increased max-width value */
     margin: auto;
-    background-color: #fff;
+    background-color: #FFFFFF;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -13,6 +13,7 @@
     font-size: 24px;
     margin-bottom: 20px;
     text-align: center;
+    color: #333;
 }
 
 .form-section form {
@@ -30,19 +31,19 @@ label {
 input,
 textarea {
     width: 100%;
-    padding: 10px;
+    padding: 10px 2px; /* Reduced padding-right value to 5px */
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
+    resize: vertical;
 }
 
 textarea {
-    resize: vertical;
     height: 80px;
 }
 
 button[type="submit"] {
-    background-color: #0073e6;
+    background-color: royalblue;
     color: #fff;
     padding: 10px 20px;
     border: none;

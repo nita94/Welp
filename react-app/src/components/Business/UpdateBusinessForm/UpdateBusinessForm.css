@@ -1,0 +1,66 @@
+/* UpdateBusinessForm.css */
+
+/* Styles for the update business form container */
+.update-business-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .update-business-header {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Styles for form labels */
+  .label {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  /* Styles for form inputs and text areas */
+  .input-text {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+  
+  .text-area {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+  
+  /* Styles for the submit button */
+  .submit-button {
+    width: 100%;
+    height: 2.634rem;
+    background-color: royalblue;
+    color: #fff;
+    border: none;
+    border-radius: 0.125rem;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.3rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .submit-button:hover {
+    background-color: royalblue;
+  }
+  

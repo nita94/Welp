@@ -1,12 +1,10 @@
-// LoginFormPage/index.js
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../../store/session";
-import DemoUser from "../DemoUser/DemoUser"; // Import the DemoUser component
-import Footer from '../Footer/Footer'; // Import the Footer component
-import "../Footer/Footer.css"
-
+import DemoUser from "../DemoUser/DemoUser";
+import "../Footer/Footer.css";
+import "./LoginFormPage.css";
 
 function LoginFormPage() {
   const dispatch = useDispatch();
@@ -69,15 +67,8 @@ function LoginFormPage() {
             Log In
           </button>
 
-          {/* Add the DemoUser button next to the Login button */}
-          <DemoUser
-            className="login-form-page-demo-button"
-            string="Demo User"
-          />
+          <DemoUser className="login-form-page-demo-button" string="Demo User" />
         </form>
-        
-        {/* Include the Footer component at the end of the page */}
-        <Footer className="login-form-page-footer" />
       </div>
     </div>
   );

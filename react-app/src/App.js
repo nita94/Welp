@@ -5,6 +5,7 @@ import { authenticate } from "./store/session";
 import { ModalProvider } from "./context/Modal"; // Import the ModalProvider
 
 import Navigation from "./components/Landing/Navigation";
+import Footer from "./components/Landing/Footer/Footer"
 import LoginFormPage from "./components/Landing/LoginFormPage";
 import SignupFormPage from "./components/Landing/SignupFormPage";
 import LandingPage from "./components/Landing/LandingPage";
@@ -63,6 +64,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      {isLoaded && <Footer />} {/* Conditionally render the Footer component */}
     </>
   );
 }

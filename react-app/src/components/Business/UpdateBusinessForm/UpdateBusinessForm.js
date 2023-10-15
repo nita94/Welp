@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { updateBusiness } from "../../../store/businesses";
 import { useModal } from "../../../context/Modal";
+import './UpdateBusinessForm.css'
 
 const UpdateBusinessForm = ({ business }) => {
     const dispatch = useDispatch();
@@ -60,61 +61,67 @@ const UpdateBusinessForm = ({ business }) => {
     };
 
     return (
-        <>
-            <div>Update a Business</div>
+        <div className="update-business-container">
+            <div className="update-business-header">Update a Business</div>
             <form onSubmit={handleUpdateBusiness}>
-                <label>
+                <label className="label">
                     Name
                     <input
                         type="text"
+                        className="input-text"
                         value={name}
                         required
                         onChange={(e) => setName(e.target.value)}
                     />
                 </label>
-                <label>
+                <label className="label">
                     Address
                     <input
                         type="text"
+                        className="input-text"
                         value={address}
                         required
                         onChange={(e) => setAddress(e.target.value)}
                     />
                 </label>
-                <label>
+                <label className="label">
                     Description
                     <textarea
+                        className="text-area"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </label>
-                <label>
+                <label className="label">
                     Hours
                     <input
                         type="text"
+                        className="input-text"
                         value={hours}
                         onChange={(e) => setHours(e.target.value)}
                     />
                 </label>
-                <label>
+                <label className="label">
                     City
                     <input
                         type="text"
+                        className="input-text"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                     />
                 </label>
-                <label>
+                <label className="label">
                     State
                     <input
                         type="text"
+                        className="input-text"
                         value={state}
                         onChange={(e) => setState(e.target.value)}
                     />
                 </label>
-                <button type="submit">Update Business</button>
+                <button type="submit" className="submit-button">Update Business</button>
             </form>
-        </>
+        </div>
     );
 };
 

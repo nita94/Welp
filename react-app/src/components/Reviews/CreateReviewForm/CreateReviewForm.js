@@ -57,7 +57,7 @@ const CreateReviewForm = ({ businessId }) => {
 
     return (
         <div className="create-review-container">
-            <h2>Write a Review</h2>
+            <h2 className="create-review-header">Write a Review</h2>
             <form onSubmit={handleCreateReview}>
                 <ul className="error-list">
                     {errors.map((error, idx) => (
