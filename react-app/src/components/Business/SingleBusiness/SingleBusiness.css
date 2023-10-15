@@ -7,22 +7,36 @@
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
 }
 
-.single-business-container h2 {
+/* Add or update this in your CSS file */
+.business-image {
+    width: 100%;  /* Ensures the image takes the full width of its container */
+    height: 300px;  /* Sets a fixed height */
+    object-fit: cover;  /* Ensures the image covers the area without distorting aspect ratio */
+    object-position: center center;  /* Centers the image within the area */
+    border-radius: 8px;  /* Optional: Rounds the corners of the image */
+    margin-bottom: 20px;  /* Adds some space between the image and the following content */
+}
+
+
+.business-details h2 {
     font-size: 24px;
-    margin: 0;
+    margin: 10px 0 0;
     color: #333;
-    margin-bottom: 10px;
-    text-align: center;
+    text-align: left;
 }
 
-.single-business-container div {
+.business-details div {
     margin-top: 10px;
     font-size: 16px;
     color: #666;
-    text-align: center;
+    text-align: left;
+}
+
+.review-button-container {
+    margin-top: 20px;
 }
 
 .manage-business-button,
@@ -49,7 +63,6 @@
     background-color: #aa0000;
 }
 
-/* Style for the review cards */
 .review-card {
     background-color: #f9f9f9;
     border: 1px solid #e0e0e0;
@@ -66,14 +79,12 @@
     margin-bottom: 10px;
 }
 
-/* Additional styles for the review content */
 .review-content p {
     margin: 0;
     font-size: 16px;
     color: #333;
 }
 
-/* Style for the review buttons */
 .review-buttons {
     display: flex;
     gap: 10px;

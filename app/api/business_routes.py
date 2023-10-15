@@ -15,13 +15,18 @@ def get_all_businesses():
 
 @business_routes.route('/<int:business_id>')
 def get_one_business(business_id):
-    business = Business.query.get(business_id)
-    if business:
-        print(f"Business found: {business.to_dict()}")  # Debug print
-        return business.to_dict()
-    else:
-        print(f"No business found for id: {business_id}")  # Debug print
-        return jsonify({"error": "Business not found"}), 404
+    try:
+        business = Business.query.get(business_id)
+        if business:
+            print(f"Business found: {business.to_dict()}")  # Debug print
+            return business.to_dict()
+        else:
+            print(f"No business found for id: {business_id}")  # Debug print
+            return jsonify({"error": "Business not found"}), 404
+    except Exception as e:
+        print(f"Error fetching business: {str(e)}")
+        return jsonify({"error": "Internal server error"}), 500
+
 
 
 
@@ -83,3 +88,4 @@ def delete_business(business_id):
     db.session.delete(business_to_delete)
     db.session.commit()
     return {'message': 'Business has been removed'}
+

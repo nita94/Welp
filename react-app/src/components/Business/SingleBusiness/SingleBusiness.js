@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+// A
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { getSelectedBusiness } from '../../../store/businesses';
 import { getReviews } from '../../../store/reviews';
-import DeleteReview from '../../Reviews/DeleteReview/DeleteReview';
-import UpdateReviewForm from '../../Reviews/UpdateReviewForm/UpdateReviewForm';
 import OpenModalButton from '../../Landing/OpenModalButton';
 import CreateReviewForm from '../../Reviews/CreateReviewForm/CreateReviewForm';
 import '../../../index.css';
@@ -16,14 +15,39 @@ const SingleBusiness = () => {
   const { businessId } = useParams();
   const user = useSelector((state) => state.session.user);
   const business = useSelector((state) => state.businesses.singleBusiness);
-  const reviews = Object.values(useSelector((state) => state.reviews.allReviews)); // Adjust based on your Redux state
+  const reviews = Object.values(useSelector((state) => state.reviews.allReviews));
+  const [hasReviewed, setHasReviewed] = useState(false);
 
   useEffect(() => {
-    console.log('Business ID in SingleBusiness:', businessId);
+    if (user) {
+      const checkReview = async () => {
+        const response = await fetch(`/api/reviews/check/${businessId}/${user.id}`);
+        const data = await response.json();
+        setHasReviewed(data.hasReviewed);
+      };
+      checkReview();
+    }
+
     dispatch(getSelectedBusiness(businessId));
     dispatch(getReviews(businessId));
-    console.log('Fetched reviews:', reviews);
-  }, [dispatch, businessId]); // Remove 'reviews' from the dependency array
+  }, [dispatch, businessId, user]);
+
+  // Add a loading state
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (business && reviews) {
+      setIsLoading(false);
+    }
+  }, [business, reviews]);
+
+  const handleReviewSubmitted = () => {
+    setHasReviewed(true);
+  };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   if (!business) {
     return (
@@ -33,27 +57,32 @@ const SingleBusiness = () => {
     );
   }
 
-  const businessOwner = user && business.user_id === user.id;
-  const reviewOwner = user && reviews.find((review) => review.user_id === user.id);
+  const businessOwner = user && (business.owner_user_id || business.user_id) === user.id;
 
   return (
     <div className="single-business-container">
-      <h2>{business.name}</h2>
-      <div>{business.address}</div>
-      <div>{business.description}</div>
-
-      {/* Display the business image */}
       {business.image_url && (
         <img src={business.image_url} alt={business.name} className="business-image standardized-image" />
       )}
 
-      <Link to={`/businesses/${businessId}/managebusiness`} className="manage-business-button">
-        Manage Your Business
-      </Link>
+      <div className="business-details">
+        <h2>{business.name}</h2>
+        <div>{business.address}</div>
+        <div>{business.description}</div>
+      </div>
 
-      {user && !(businessOwner || reviewOwner) && (
-        <div>
-          <OpenModalButton buttonText="Add Review" modalComponent={<CreateReviewForm businessId={businessId} />} />
+      {user && businessOwner && (
+        <Link to={`/businesses/${businessId}/managebusiness`} className="manage-business-button">
+          Manage Your Business
+        </Link>
+      )}
+
+      {user && !businessOwner && !hasReviewed && (
+        <div className="review-button-container">
+          <OpenModalButton
+            buttonText="Add Review"
+            modalComponent={<CreateReviewForm businessId={businessId} onReviewSubmit={handleReviewSubmitted} />}
+          />
         </div>
       )}
 
