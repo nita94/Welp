@@ -1,66 +1,66 @@
 /* Footer.css */
 
 .footerWrapper {
-    display: flex;
-    flex-direction: column;
-    background-color: #f3f3f3; /* Updated background color (off-white) */
-    color: #333; /* Updated text color (black) */
-    padding: 2rem;
-  }
-  
-  .footer-container {
-    width: 80%;
-    height: 100%;
-    margin: auto;
-  }
-  
-  .footer-col {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .footer-col ul {
-    list-style: none; /* Remove bullet points */
-    padding: 0;
-  }
-  
-  .footer-col ul li h1 {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    color: #333; /* Updated text color (black) */
-  }
-  
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    font-size: 12px;
-  }
-  
-  .footer-links h1 {
-    font-weight: 500;
-    margin-left: 3px;
-    font-size: 14px;
-    color: #333; /* Updated text color (black) */
-  }
-  
-  .footer-links i {
-    font-size: 14px;
-    margin-left: 1px;
-    color: #333; /* Updated text color (black) */
-  }
-  
-  .footer-header {
-    margin-top: 10px;
-    margin-bottom: 30px;
-  }
-  
-  .footer-header h1 {
-    font-size: 24px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    color: #333; /* Updated text color (black) */
-  }
-  
+  background-color: #f3f3f3;
+  color: #333;
+  padding: 1rem;
+}
+
+.footer-container {
+  width: 80%;
+  height: 100%;
+  margin: auto;
+}
+
+.footer-col {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li h1 {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* Reduce margin-top here to adjust the space */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px; /* Adjust this value as needed */
+  font-size: 12px;
+  color: #333;
+}
+
+.footer-links h1 {
+  font-weight: 500;
+  margin-left: 3px;
+  font-size: 14px;
+  color: #333;
+}
+
+.footer-links i {
+  font-size: 14px;
+  margin-left: 1px;
+  color: #333;
+}
+
+.footer-header {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.footer-header h1 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #333;
+}

@@ -1,3 +1,4 @@
+import React from "react";
 import "./Footer.css";
 
 const Footer = () => {
@@ -48,12 +49,6 @@ const Footer = () => {
             Welp
             <i className="fa-brands fa-yelp"></i>
           </h1>
-          
-          {/* <div>
-            <h2>❤</h2>
-            <h2>❤</h2>
-            <h2>❤</h2>
-          </div> */}
         </div>
       </div>
     </div>

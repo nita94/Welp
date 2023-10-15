@@ -1,5 +1,3 @@
-// ManageYourBusinesses.js
-
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +19,11 @@ const ManageYourBusinesses = () => {
     useEffect(() => {
         dispatch(getBusinesses());
     }, [dispatch]);
+
+    // Add console logs to check the values
+    console.log('All Businesses:', businesses);
+    console.log('User:', user);
+    console.log('Owned Businesses:', ownedBusinesses);
 
     return (
         <div className="manage-businesses-container">

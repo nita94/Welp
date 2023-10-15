@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 import * as sessionActions from "../../../store/session";
 import "./profilebutton.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faCircleUser, faBookmark, faUserPlus, faGear, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { faUser as faUserRegular } from "@fortawesome/free-regular-svg-icons";
 
-function ProfileButton({ user }) {
+function ProfileButton() {
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -34,18 +30,26 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout()).then(() => {
-      history.push("/SeeYouSoon");
+      history.push("/");
     });
   };
+
+  const navigateToManageBusinesses = () => {
+    // Use history.push to navigate to the user's managebusiness page
+    history.push(`/businesses/${sessionUser.id}/managebusiness`);
+  };
+
+  // Logging the user information for debugging purposes
+  console.log("User Information: ", sessionUser);
 
   return (
     <div className="profile-wrapper">
       <div className="userIcon" onClick={openMenu}>
-        {sessionUser?.avatar ? (
+        {sessionUser?.profile_picture_url ? (
           <div
             className="profileImage"
             style={{
-              backgroundImage: `url(${sessionUser.avatar})`,
+              backgroundImage: `url(${sessionUser.profile_picture_url})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -58,25 +62,12 @@ function ProfileButton({ user }) {
       </div>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li>{user.firstName}</li>
-
-          <li>
-            <i className="fa-regular fa-circle-user"></i>About Me
-          </li>
-          <li>
-            <i className="fa-regular fa-bookmark" />
-            My Collections
-          </li>
-          <li>
-            <i className="fa-solid fa-user-plus"></i>Find Friends
-          </li>
-          <li>
-            <i className="fa-solid fa-gear"></i>Account Settings
-          </li>
-
-          <li className="logoutButton" onClick={logout}>
-            <i className="fa-solid fa-right-from-bracket"></i>Log Out
-          </li>
+          {/* Displaying a greeting with the user's username */}
+          <li>Hello, {sessionUser?.username ?? 'User'}!</li>
+          {/* Add the line "My Businesses" below the greeting */}
+          <li onClick={navigateToManageBusinesses}>My Businesses</li>
+          {/* Logout Button */}
+          <li className="logoutButton" onClick={logout}>Log Out</li>
         </ul>
       )}
     </div>
