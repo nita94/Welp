@@ -1,13 +1,11 @@
 /* LoginForm.css */
 
-/* Style the page background */
 body {
     background-color: #f6f6f6;
     margin: 0;
     padding: 0;
   }
   
-  /* Style the login form container */
   form {
     background-color: #fff;
     border-radius: 8px;
@@ -16,8 +14,7 @@ body {
     max-width: 400px;
     margin: 0 auto;
   }
-  
-  /* Style the form header */
+ 
   h1 {
     font-size: 24px;
     text-align: center;
@@ -25,14 +22,13 @@ body {
     color: #333;
   }
   
-  /* Style the error messages */
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  /* Style form labels and inputs */
+
   label {
     display: block;
     margin-bottom: 10px;
@@ -40,7 +36,7 @@ body {
     color: #555;
   }
   
-  /* Add padding to input elements for even spacing */
+  
   input[type="text"],
   input[type="password"] {
     width: 100%;
@@ -48,10 +44,9 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 15px;
-    box-sizing: border-box; /* Include padding in element width */
+    box-sizing: border-box; 
   }
   
-  /* Style the submit button */
   button[type="submit"] {
     background-color: #0073e6;
     color: #fff;

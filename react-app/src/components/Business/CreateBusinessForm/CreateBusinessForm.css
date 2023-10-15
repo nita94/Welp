@@ -34,7 +34,7 @@
 }
 
 .form-section label {
-    display: block; /* Ensures label appears above the input/textarea */
+    display: block; 
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 5px; 
@@ -51,7 +51,7 @@
 }
 
 .form-section textarea {
-    height: 60px; /* Adjust height as needed */
+    height: 60px; 
     resize: vertical;
 }
 

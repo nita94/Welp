@@ -1,11 +1,9 @@
 /* LoginForm.css */
 
-/* Style the page background */
 body {
     background-color: #f6f6f6;
   }
   
-  /* Style the login form container */
   form {
     background-color: #fff;
     border-radius: 8px;
@@ -15,7 +13,6 @@ body {
     margin: 0 auto;
   }
   
-  /* Style the form header */
   h1 {
     font-size: 24px;
     text-align: center;
@@ -23,20 +20,18 @@ body {
     color: #333;
   }
   
-/* Style the error messages */
 ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  color: #ff0000; /* Change the color to your desired color (e.g., black or dark gray) */
+  color: #ff0000; 
 }
 
-/* Style form labels and inputs */
 label {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
-  color: #555; /* Change the color to your desired color (e.g., black or dark gray) */
+  color: #555; 
 }
 
 input[type="text"],
@@ -46,11 +41,10 @@ input[type="password"] {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 15px;
-  color: #555; /* Change the color to your desired color (e.g., black or dark gray) */
+  color: #555; 
 }
 
   
-  /* Style the submit button */
   button[type="submit"] {
     background-color: #0073e6;
     color: #fff;
