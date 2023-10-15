@@ -34,6 +34,11 @@ function ProfileButton() {
     });
   };
 
+  const navigateToManageBusinesses = () => {
+    // Use history.push to navigate to the user's managebusiness page
+    history.push(`/businesses/${sessionUser.id}/managebusiness`);
+  };
+
   // Logging the user information for debugging purposes
   console.log("User Information: ", sessionUser);
 
@@ -57,9 +62,10 @@ function ProfileButton() {
       </div>
       {showMenu && (
         <ul className="profile-dropdown">
-          {/* Displaying the user's username or a placeholder if it's not available */}
           {/* Displaying a greeting with the user's username */}
           <li>Hello, {sessionUser?.username ?? 'User'}!</li>
+          {/* Add the line "My Businesses" below the greeting */}
+          <li onClick={navigateToManageBusinesses}>My Businesses</li>
           {/* Logout Button */}
           <li className="logoutButton" onClick={logout}>Log Out</li>
         </ul>
