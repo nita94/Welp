@@ -128,3 +128,36 @@
   transition: all ease-in-out 0.4s;
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
 }
+
+/* ... existing CSS ... */
+
+/* Container to wrap the button and dropdown */
+.dropdown-container {
+  position: relative;
+}
+
+/* Styling for the dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Position it below the button */
+  left: 0; /* Align it to the left of the button */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1000; /* Ensure it sits above other elements */
+}
+
+.dropdown-menu button {
+  all: unset;
+  cursor: pointer;
+  padding: 10px;
+  background-color: white;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f1f1f1;
+}

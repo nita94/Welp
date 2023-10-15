@@ -30,7 +30,7 @@ function ProfileButton() {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout()).then(() => {
-      history.push("/SeeYouSoon");
+      history.push("/");
     });
   };
 
