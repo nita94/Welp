@@ -1,61 +1,15 @@
-/* LoginForm.css */
-
 body {
-    background-color: #f6f6f6;
-  }
-  
-  form {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  h1 {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-ul {
-  list-style: none;
+  background-color: #f6f6f6;
+}
+
+.login-form-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.li-errors {
+  color: red;
+  list-style-type: none;
   padding: 0;
-  margin: 0;
-  color: #ff0000; 
-}
-
-label {
-  display: block;
   margin-bottom: 10px;
-  font-weight: bold;
-  color: #555; 
 }
-
-input[type="text"],
-input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  color: #555; 
-}
-
-  
-  button[type="submit"] {
-    background-color: #0073e6;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0055aa;
-  }
-  

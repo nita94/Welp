@@ -1,8 +1,11 @@
+// LoginFormPage/index.js
 import React, { useState } from "react";
-import { login } from "../../../store/session"; // Update the import path
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import './LoginForm.css';
+import { login } from "../../../store/session";
+import DemoUser from "../DemoUser/DemoUser"; // Import the DemoUser component
+import Footer from '../Footer/Footer'; // Import the Footer component
+import "../Footer/Footer.css"
 
 
 function LoginFormPage() {
@@ -23,35 +26,60 @@ function LoginFormPage() {
   };
 
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+    <div className="login-form-page-container">
+      <div className="login-form-page-content">
+        <h1 className="login-form-page-h1">Log In to Your Account</h1>
+        <form onSubmit={handleSubmit} className="login-form-page-form">
+          {errors.length > 0 && (
+            <ul className="error-list">
+              {errors.map((error, idx) => (
+                <li key={idx} className="error">
+                  {error}
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="form-group">
+            <label htmlFor="email" className="login-form-page-label">
+              Email
+            </label>
+            <input
+              type="text"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="login-form-page-input"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password" className="login-form-page-label">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="login-form-page-input"
+            />
+          </div>
+          <button type="submit" className="login-form-page-button">
+            Log In
+          </button>
+
+          {/* Add the DemoUser button next to the Login button */}
+          <DemoUser
+            className="login-form-page-demo-button"
+            string="Demo User"
           />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Log In</button>
-      </form>
-    </>
+        </form>
+        
+        {/* Include the Footer component at the end of the page */}
+        <Footer className="login-form-page-footer" />
+      </div>
+    </div>
   );
 }
 

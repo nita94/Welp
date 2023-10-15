@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createReview } from '../../../store/reviews'; 
+import { createReview } from '../../../store/reviews';
 import { useModal } from '../../../context/Modal';  // Import useModal
 import './CreateReviewForm.css';
 
@@ -22,6 +22,13 @@ const CreateReviewForm = ({ businessId }) => {
     const handleCreateReview = async (e) => {
         e.preventDefault(); 
 
+        const errorsObj = {};
+
+        // Validate inputs
+        if (rating < 1 || rating > 5) errorsObj.rating = "Rating must be between 1 and 5";
+        if (content.length < 10) errorsObj.content = "Review must be at least 10 characters";
+        else if (content.length > 100) errorsObj.content = "Review must be less than 100 characters";
+
         const reviewData = {
             content,
             rating,
@@ -29,20 +36,22 @@ const CreateReviewForm = ({ businessId }) => {
             business_id: businessId, 
         };
 
-        console.log('Submitting review:', reviewData); 
+        // If no errors, create review
+        if (Object.keys(errorsObj).length === 0) {
+            try {
+                console.log('Submitting review:', reviewData); 
+                const data = await dispatch(createReview(reviewData, businessId));
+                console.log('Review Data:', data);
 
-        try {
-            console.log('Creating review for businessId:', businessId); 
-            console.log('Review data:', reviewData); 
-            const data = await dispatch(createReview(reviewData, businessId));
-            console.log('Review Data:', data);
+                closeModal();  // Close the modal after review submission
 
-            closeModal();  // Close the modal after review submission
-
-            history.push(`/businesses/${businessId}`);
-        } catch (error) {
-            console.error('Fetch Error:', error);
-            setErrors([...errors, 'An error occurred while creating the review.']);
+                history.push(`/businesses/${businessId}`);
+            } catch (error) {
+                console.error('Fetch Error:', error);
+                setErrors([...errors, 'An error occurred while creating the review.']);
+            }
+        } else {
+            setErrors(Object.values(errorsObj));  // If errors, set state
         }
     };
 

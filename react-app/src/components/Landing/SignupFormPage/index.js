@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../../store/session";
 import './SignupForm.css';
+import Footer from '../Footer/Footer'; // Import the Footer component (ensure the correct path)
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -72,6 +73,9 @@ function SignupFormPage() {
         </label>
         <button type="submit">Sign Up</button>
       </form>
+      
+      {/* Render the Footer component here */}
+      <Footer />
     </>
   );
 }

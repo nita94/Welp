@@ -1,78 +1,61 @@
-/* CreateBusinessForm.css */
+/* CreateBusiness.css */
 
 .create-business-form-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    max-width: 900px;
-    margin: 50px auto;
+    max-width: 400px;
+    margin: auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.form-section {
-    flex: 1;
-    margin-right: 20px; 
-}
-
-.image-section {
-    flex: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-section h2 {
     font-size: 24px;
-    font-weight: 600;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .form-section form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
-.form-section label {
-    display: block; 
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 5px; 
-}
-
-.form-section input,
-.form-section textarea {
-    width: 100%;  
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
+label {
     font-size: 14px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    color: #555;
 }
 
-.form-section textarea {
-    height: 60px; 
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+textarea {
     resize: vertical;
+    height: 80px;
 }
 
-.form-section button {
-    background-color: black;
+button[type="submit"] {
+    background-color: #0073e6;
     color: #fff;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
 }
 
-.form-section button:hover {
-    background-color: #555;
+button[type="submit"]:hover {
+    background-color: #0055aa;
 }
 
-.image-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.error {
+    color: #e00707;
+    font-size: 12px;
 }
