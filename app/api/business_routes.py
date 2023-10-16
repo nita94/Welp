@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, current_app
 from flask_login import login_required, current_user
+from sqlalchemy import func  # Import this at the top of your file
 from app.models import Business, db
 from app.forms.business_form import BusinessForm
 
@@ -89,3 +90,16 @@ def delete_business(business_id):
         db.session.rollback()
         current_app.logger.error(f"Error deleting business {business_id}: {str(e)}")
         return jsonify({"error": "Internal server error"}), 500
+
+@business_routes.route('/<int:business_id>/avg_rating', methods=['PUT'])
+def update_avg_rating(business_id):
+    data = request.get_json()
+    avg_rating = data.get('avg_rating')
+    
+    business = Business.query.get(business_id)
+    if business:
+        business.avg_rating = avg_rating
+        db.session.commit()
+        return jsonify(message="Average rating updated successfully"), 200
+    else:
+        return jsonify(message="Business not found"), 404

@@ -11,6 +11,7 @@ class Business(db.Model):
     owner_user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(255), nullable=False)
     address = db.Column(db.String(255), nullable=False)
+    avg_rating = db.Column(db.Float, nullable=True)
     city = db.Column(db.String(100), nullable=False)  
     state = db.Column(db.String(2), nullable=False)   
     description = db.Column(db.Text, nullable=True)
@@ -30,6 +31,7 @@ class Business(db.Model):
             'owner_user_id': self.owner_user_id,
             'name': self.name,
             'address': self.address,
+            'avg.rating': self.avg_rating,
             'city': self.city,       
             'state': self.state,      
             'description': self.description,

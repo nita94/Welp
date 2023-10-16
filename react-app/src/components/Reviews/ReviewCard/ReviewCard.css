@@ -1,3 +1,5 @@
+/* ReviewCard.css */
+
 .review-card {
     background-color: #f9f9f9;
     border: 1px solid #e0e0e0;
@@ -6,52 +8,62 @@
     margin: 10px 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.reviewer-info strong {
+    align-items: flex-start; /* Align elements to the left */
+  }
+  
+  .reviewer-info strong {
     font-size: 18px;
     color: #333;
-}
-
-.rating-date-info,
-.rating-info,
-.date-info {
+    margin-bottom: 5px; /* Add margin to separate from the rating */
+  }
+  
+  .rating-date-info {
+    display: flex; /* Make the rating and date info a flex container */
+    align-items: center; /* Align elements vertically in the container */
+    margin-bottom: 10px; /* Add margin to separate from the review content */
+  }
+  
+  .rating-info {
     font-size: 14px;
     color: #555;
-}
-
-.review-content {
-    margin-bottom: 10px;
+    margin-right: 10px; /* Add margin between rating and date */
+  }
+  
+  .date-info {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .review-content {
+    margin-top: 10px; /* Add margin to separate from the rating-date info */
     word-wrap: break-word;
     overflow-wrap: break-word;
-    white-space: pre-line; 
-    max-height: 100px; 
-    overflow-y: auto; 
-    padding-right: 1em; 
+    white-space: pre-line;
+    max-height: 100px;
+    overflow-y: auto;
+    padding-right: 1em;
     line-height: 1.6;
     text-align: left;
-}
-
-.review-content::-webkit-scrollbar {
+  }
+  
+  .review-content::-webkit-scrollbar {
     width: 0.5em;
-}
-
-.review-content::-webkit-scrollbar-thumb {
+  }
+  
+  .review-content::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
-}
-
-.read-more {
+  }
+  
+  .read-more {
     color: blue;
     cursor: pointer;
     display: inline-block;
     margin-left: 5px;
-}
-
-.update-business-button,
-.delete-business-button {
+  }
+  
+  .update-business-button,
+  .delete-business-button {
     padding: 8px 16px;
     background-color: red;
     color: #fff;
@@ -62,9 +74,10 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-align: center;
-}
-
-.update-business-button:hover,
-.delete-business-button:hover {
+  }
+  
+  .update-business-button:hover,
+  .delete-business-button:hover {
     background-color: #aa0000;
-}
+  }
+  

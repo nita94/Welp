@@ -1,96 +1,66 @@
-/* Your existing CSS ... */
-
-.logo {
-  max-width: 40vw;
-  height: auto;
-}
-
-.navigation ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.landing-page-container {
+  font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   display: flex;
-}
-
-.navigation li {
-  margin-right: 20px;
-}
-
-.navigation a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.main-content {
+  flex-wrap: wrap;
+  justify-content: space-around;
   padding: 20px;
+  background-color: #f5f5f5;
 }
 
-.search-bar {
-  margin-bottom: 30px;
-}
-
-.search-bar input {
-  padding: 10px;
-  width: 80%;
-}
-
-.search-bar button {
-  padding: 10px;
-  width: 15%;
-  margin-left: 5%;
-}
-
-.featured-businesses {
+.landing-page-container {
+  font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: #f5f5f5;
+  background-size: cover; /* Set the background size to cover */
+  background-repeat: no-repeat; /* Prevent background image from repeating */
+  background-position: center center; /* Center the background image */
+  min-height: 100vh; /* Set a minimum height to cover the viewport */
 }
 
-.business-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 300px);
-  gap: 15px;
-  justify-content: center;
-  padding-bottom: 20px;
+
+.business-tile-container a {
+  text-decoration: none;
+  color: #333;
 }
 
-.business {
-  width: 300px;
-  height: 350px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+.business-tile-container a:hover {
+  text-decoration: underline;
 }
 
-.business img {
+.business-tile-container div {
+  margin-bottom: 10px;
+  font-size: 18px; 
+  font-weight: bold; 
+}
+
+.business-tile-container img {
   width: 100%;
-  height: 200px;
+  height: 200px; 
   object-fit: cover;
+  object-position: center center;
+  margin-bottom: 10px; 
 }
 
-.business h3, .business p, .star-rating {
-  margin: 5px 10px;
-  line-height: 1.2;
-  text-align: center;
-}
-
-.star-rating {
-  display: flex;
-  justify-content: center;
-  margin: 5px 0;
-}
-
-.star {
+.star-rating .star {
   cursor: pointer;
-  color: #ccc;
-  font-size: 20px;
-  transition: color 200ms;
+  transition: color 0.2s;
 }
 
-.star.filled {
-  color: #ffd700;
+.star-rating .star.filled {
+  color: gold;
+}
+
+.business-name-link {
+  text-decoration: none;
+  color: inherit;
+  font-size: 18px; 
+  font-weight: bold;
+  display: block; 
+}
+
+.business-name-link:hover {
+  cursor: pointer;
 }
