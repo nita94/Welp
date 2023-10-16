@@ -1,3 +1,4 @@
+// A
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
@@ -58,20 +59,6 @@ const SingleBusiness = () => {
 
   const businessOwner = user && (business.owner_user_id || business.user_id) === user.id;
 
-  // Calculate average rating for the business
-  const initial = 0;
-  const reviewsAvg =
-  reviews.length > 0
-    ? (
-        reviews
-          .map((review) => parseFloat(review.rating) || 0) // Use review.rating here
-          .reduce((acc, curr) => acc + curr, initial) / 
-        reviews.length
-      ).toFixed(1)
-    : 0;
-
-
-
   return (
     <div className="single-business-container">
       {business.image_url && (
@@ -79,12 +66,7 @@ const SingleBusiness = () => {
       )}
 
       <div className="business-details">
-        <div className="business-header">
-          <h2>{business.name}</h2>
-          <div className="business-rating">
-            {reviewsAvg} <i className="fa fa-star"></i>
-          </div>
-        </div>
+        <h2>{business.name}</h2>
         <div>{business.address}</div>
         <div>{business.description}</div>
       </div>

@@ -66,31 +66,19 @@ export const createBusiness = (business) => async (dispatch) => {
 };
 
 export const updateBusiness = (payload) => async (dispatch) => {
-    const { business, businessId } = payload;
+    const { businessId, business } = payload;
+    const response = await fetch(`/api/businesses/${businessId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(business),
+    });
 
-    console.log(`Sending PUT request to: /api/businesses/${businessId}`); // Debugging line
-    console.log('Payload:', payload); // Debugging line
-
-    try {
-        const response = await fetch(`/api/businesses/${businessId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(business),
-        });
-
-        if (response.ok) {
-            const updatedBusiness = await response.json();
-            console.log('Update successful:', updatedBusiness); // Debugging line
-            dispatch(getSelectedBusiness(updatedBusiness.id)); // Assuming getSelectedBusiness is defined
-            return updatedBusiness;
-        } else {
-            console.log('Response not ok:', response.statusText); // Debugging line
-            throw response;
-        }
-    } catch (error) {
-        console.error('Error in updateBusiness fetch:', error); // Debugging line
-        // Here you might dispatch an action to set an error state in Redux
-        return null;
+    if (response.ok) {
+        const updatedBusiness = await response.json();
+        dispatch(getSingleBusiness(updatedBusiness.id));
+        return updatedBusiness;
+    } else {
+        console.error('Failed to update business');
     }
 };
 

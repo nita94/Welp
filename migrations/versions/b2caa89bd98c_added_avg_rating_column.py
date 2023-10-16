@@ -1,8 +1,8 @@
-"""Add city, state, hours, and image_url fields to Business
+"""added avg rating column
 
-Revision ID: 61dc9bb760d5
+Revision ID: b2caa89bd98c
 Revises: 
-Create Date: 2023-10-10 22:45:15.558068
+Create Date: 2023-10-16 01:41:34.668128
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '61dc9bb760d5'
+revision = 'b2caa89bd98c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -42,6 +42,7 @@ def upgrade():
     sa.Column('owner_user_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('address', sa.String(length=255), nullable=False),
+    sa.Column('avg_rating', sa.Float(), nullable=True),
     sa.Column('city', sa.String(length=100), nullable=False),
     sa.Column('state', sa.String(length=2), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
