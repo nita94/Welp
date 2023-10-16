@@ -1,16 +1,14 @@
-/* CreateReviewForm.css */
-
 .create-review-container {
-  max-width: 400px; /* Set the maximum width to control the form's width */
-  margin: 0 auto; /* Center the form horizontally */
-  padding: 20px; /* Add padding for spacing */
-  background-color: #fff; /* Background color for the form */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle elevation */
-  border-radius: 8px; /* Rounded corners */
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 .create-review-header {
-  font-size: 24px; /* Increase the font size for the header */
+  font-size: 24px;
   text-align: center;
   margin-bottom: 20px;
   color: #333;
@@ -76,4 +74,3 @@
 .submit-button:hover {
   background-color: royalblue;
 }
-

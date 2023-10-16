@@ -14,12 +14,11 @@
   justify-content: space-around;
   padding: 20px;
   background-color: #f5f5f5;
-  background-size: cover; /* Set the background size to cover */
-  background-repeat: no-repeat; /* Prevent background image from repeating */
-  background-position: center center; /* Center the background image */
-  min-height: 100vh; /* Set a minimum height to cover the viewport */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 100vh;
 }
-
 
 .business-tile-container a {
   text-decoration: none;
@@ -32,16 +31,16 @@
 
 .business-tile-container div {
   margin-bottom: 10px;
-  font-size: 18px; 
-  font-weight: bold; 
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .business-tile-container img {
   width: 100%;
-  height: 200px; 
+  height: 200px;
   object-fit: cover;
   object-position: center center;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
 .star-rating .star {
@@ -56,9 +55,9 @@
 .business-name-link {
   text-decoration: none;
   color: inherit;
-  font-size: 18px; 
+  font-size: 18px;
   font-weight: bold;
-  display: block; 
+  display: block;
 }
 
 .business-name-link:hover {
@@ -66,12 +65,12 @@
 }
 
 .business-tile-container div.recommendation {
-  font-size: 14px; /* Set the font size to make it smaller */
-  margin-bottom: 5px; /* Reduce the margin to decrease padding */
+  font-size: 14px;
+  margin-bottom: 5px;
 }
 
 .business-tile-container div.hours {
-  font-size: 14px; /* Set the font size to make it smaller */
-  color: grey; /* Set the text color to gray */
-  margin-bottom: 5px; /* Reduce the margin to decrease padding */
+  font-size: 14px;
+  color: grey;
+  margin-bottom: 5px;
 }

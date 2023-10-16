@@ -1,15 +1,14 @@
 .dropdown-menu button {
-    all: unset;
-    cursor: pointer;
-    padding: 5px;
-    background-color: transparent; /* Set the background color to transparent */
-    width: 100%;
-    text-align: left;
-    border: none; /* Remove the button border */
-    font-size: 14px; /* Adjust the font size to your liking */
-  }
-  
-  .dropdown-menu button:hover {
-    background-color: transparent; /* Set the background color to transparent on hover */
-  }
-  
+  all: unset;
+  cursor: pointer;
+  padding: 5px;
+  background-color: transparent;
+  width: 100%;
+  text-align: left;
+  border: none;
+  font-size: 14px;
+}
+
+.dropdown-menu button:hover {
+  background-color: transparent;
+}

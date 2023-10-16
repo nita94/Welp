@@ -1,10 +1,8 @@
 .single-business-page {
-  /* ... your current styles ... */
-  background-size: cover; 
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center top; /* Align the top of the image with the top of the container */
+  background-position: center top;
 }
-
 
 .single-business-container,
 .business-image {
@@ -21,7 +19,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px; /* Add vertical spacing between elements */
+  gap: 20px;
 }
 
 .business-image {
@@ -31,15 +29,14 @@
   margin-bottom: 20px;
 }
 
-/* Business details */
 .business-details {
   text-align: left;
-  margin-bottom: 20px; /* Add margin to give space below the text */
+  margin-bottom: 20px;
 }
 
 .business-details h2 {
   font-size: 24px;
-  margin: 0; /* Remove top margin */
+  margin: 0;
   color: #333;
 }
 
@@ -48,7 +45,6 @@
   color: #666;
 }
 
-/* Review buttons */
 .review-button-container {
   margin-top: 20px;
 }
@@ -84,20 +80,19 @@
 }
 
 .add-review-button {
-  background-color: #ff4500; /* Adjust the color as needed */
+  background-color: #ff4500;
 }
 
 .add-review-button:hover {
-  background-color: #c13500; /* Adjust the hover color as needed */
+  background-color: #c13500;
 }
 
-/* Reviews container */
 .reviews-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px; /* Add vertical spacing between reviews */
-  width: 100%; /* Make sure it spans the entire width */
+  gap: 20px;
+  width: 100%;
 }
 
 @media (min-width: 600px) {
@@ -106,7 +101,6 @@
   }
 }
 
-/* SingleBusiness.css */
 .business-header {
   display: flex;
   align-items: center;
@@ -117,4 +111,3 @@
   font-size: 24px;
   color: gold;
 }
-

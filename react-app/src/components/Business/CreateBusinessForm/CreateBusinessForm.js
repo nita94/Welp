@@ -31,6 +31,9 @@ const CreateBusinessForm = () => {
         if (imageUrl.length < 10) errorsObj.imageUrl = "Image Url must be at least 10 characters";
         if (!imageUrl.endsWith('.jpg') && !imageUrl.endsWith('.png') && !imageUrl.endsWith('.jpeg'))
             errorsObj.imageUrl = "Image Url must be a .jpg, .png, or .jpeg";
+        
+        // Validate description
+        if (description.length < 10) errorsObj.description = "Description must be at least 10 characters";
 
         // If no errors, create business
         if (Object.keys(errorsObj).length === 0) {

@@ -1,4 +1,3 @@
-/* Signup Page Styles */
 .signup-form-page-container {
   background-color: #FFFFFF;
   padding: 20px;
@@ -26,7 +25,7 @@
 }
 
 .signup-form-page-input {
-  width: 100%;  /* Set width to 100% for consistency */
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -34,7 +33,6 @@
   box-sizing: border-box;
 }
 
-/* Additional styles for better UX */
 .signup-form-page-input:focus {
   border-color: royalblue;
 }
@@ -57,7 +55,7 @@
 }
 
 .signup-form-page-button:hover {
-  background-color: royalblue;  /* Ensure this provides a discernible change on hover */
+  background-color: royalblue;
 }
 
 .error-list {
