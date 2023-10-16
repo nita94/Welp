@@ -6,7 +6,7 @@ import { getReviews } from '../../../store/reviews';
 import OpenModalButton from '../../Landing/OpenModalButton';
 import CreateReviewForm from '../../Reviews/CreateReviewForm/CreateReviewForm';
 import '../../../index.css';
-import './SingleBusiness.css';
+import './SingleBusiness.css'; // Import SingleBusiness.css
 import ReviewCard from '../../Reviews/ReviewCard/ReviewCard';
 
 const SingleBusiness = () => {
@@ -18,7 +18,6 @@ const SingleBusiness = () => {
   const [hasReviewed, setHasReviewed] = useState(false);
 
   useEffect(() => {
-    console.log('Fetching business and reviews for business ID:', businessId);  // NEW LOG
     if (user) {
       const checkReview = async () => {
         const response = await fetch(`/api/reviews/check/${businessId}/${user.id}`);
@@ -35,8 +34,6 @@ const SingleBusiness = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log('Business data:', business); // NEW LOG
-    console.log('Review data:', reviews);   // NEW LOG
     if (business && reviews) {
       setIsLoading(false);
     }
@@ -55,17 +52,13 @@ const SingleBusiness = () => {
   }
 
   if (!business) {
-    return (
-      <p>
-        Error: Business data not loaded. Check the businessId: {businessId} and Redux state.
-      </p>
-    );
+    return <p>Error: Business data not loaded. Check the businessId: {businessId} and Redux state.</p>;
   }
 
   const businessOwner = user && (business.owner_user_id || business.user_id) === user.id;
 
   return (
-    <div className="single-business-container">
+    <div className="single-business-page">
       {business.image_url && (
         <img src={business.image_url} alt={business.name} className="business-image standardized-image" />
       )}
@@ -87,6 +80,7 @@ const SingleBusiness = () => {
           <OpenModalButton
             buttonText="Add Review"
             modalComponent={<CreateReviewForm businessId={businessId} onReviewSubmit={handleReviewSubmitted} />}
+            buttonStyling="add-review-button" // Applying the styling class to the button
           />
         </div>
       )}
