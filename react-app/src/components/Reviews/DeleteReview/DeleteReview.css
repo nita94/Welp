@@ -1,14 +1,13 @@
-/* /home/nickt/welp1/react-app/src/components/Reviews/DeleteReview/DeleteReview.css */
 .delete-review-container {
     text-align: center;
     margin-top: 20px;
-    padding: 20px; /* Add padding to create spacing around the modal content */
+    padding: 20px;
 }
 
 .delete-review-buttons {
     margin-top: 10px;
     display: flex;
-    justify-content: space-between; /* Separate buttons with space */
+    justify-content: space-between;
 }
 
 .delete-review-button,
@@ -23,7 +22,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     max-width: 150px;
-    width: 45%; /* Adjust button width to create space between them */
+    width: 45%;
 }
 
 .delete-review-button:hover,
