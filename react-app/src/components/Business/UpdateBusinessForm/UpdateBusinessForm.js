@@ -22,7 +22,7 @@ const UpdateBusinessForm = ({ business }) => {
 
     const handleUpdateBusiness = async (e) => {
         e.preventDefault();
-        
+
         // Validations
         const errorsObj = {};
 
@@ -71,8 +71,14 @@ const UpdateBusinessForm = ({ business }) => {
     };
 
     useEffect(() => {
-        // Logic to run on component mount or specific prop changes
-    }, [business]);
+        let isMounted = true; // initially, the component is mounted
+
+        // ... other code inside useEffect ...
+
+        return () => {
+            isMounted = false; // set it to false when the component unmounts
+        };
+    }, [business, closeModal, dispatch]);
 
     return (
         <div className="update-business-container">

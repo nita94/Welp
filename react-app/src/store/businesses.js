@@ -125,7 +125,11 @@ export default function businessReducer(state = initialState, action) {
             console.log('Updating single business:', action.business);
             return { 
                 ...state, 
-                singleBusiness: action.business 
+                singleBusiness: action.business,
+                allBusinesses: {
+                    ...state.allBusinesses,
+                    [action.business.id]: action.business
+                }
             };
         case REMOVE_BUSINESS:
             const newAllBusinesses = { ...state.allBusinesses };
