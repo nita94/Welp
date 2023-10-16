@@ -18,8 +18,11 @@ const LandingPage = () => {
 
   if (!businesses.length) return null;
 
+  // Define the background image URL
+  const backgroundImageURL = process.env.PUBLIC_URL + '/images/chopboard.png';
+
   return (
-    <div className='landing-page-container'>
+    <div className='landing-page-container' style={{ backgroundImage: `url(${backgroundImageURL})` }}>
       {businesses.map(business => {
         return (
           <div className='business-tile-container' key={business.id}>

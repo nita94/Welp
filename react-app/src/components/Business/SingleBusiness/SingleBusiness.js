@@ -18,6 +18,7 @@ const SingleBusiness = () => {
   const [hasReviewed, setHasReviewed] = useState(false);
 
   useEffect(() => {
+    console.log('Fetching business and reviews for business ID:', businessId);  // NEW LOG
     if (user) {
       const checkReview = async () => {
         const response = await fetch(`/api/reviews/check/${businessId}/${user.id}`);
@@ -31,10 +32,11 @@ const SingleBusiness = () => {
     dispatch(getReviews(businessId));
   }, [dispatch, businessId, user]);
 
-  // Add a loading state
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    console.log('Business data:', business); // NEW LOG
+    console.log('Review data:', reviews);   // NEW LOG
     if (business && reviews) {
       setIsLoading(false);
     }
@@ -42,6 +44,10 @@ const SingleBusiness = () => {
 
   const handleReviewSubmitted = () => {
     setHasReviewed(true);
+  };
+
+  const handleReviewDeleted = () => {
+    setHasReviewed(false);
   };
 
   if (isLoading) {
@@ -89,7 +95,7 @@ const SingleBusiness = () => {
       <div className="reviews-container">
         {reviews.length > 0 ? (
           reviews.map((review) => (
-            <ReviewCard key={review.id} review={review} user={user} singleBusinessPage={true} />
+            <ReviewCard key={review.id} review={review} user={user} singleBusinessPage={true} onReviewDelete={handleReviewDeleted} />
           ))
         ) : (
           <p>No reviews available.</p>

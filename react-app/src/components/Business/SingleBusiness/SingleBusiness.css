@@ -1,3 +1,5 @@
+/* SingleBusiness.css */
+
 .single-business-container {
     padding: 20px;
     border: 1px solid #e0e0e0;
@@ -7,41 +9,39 @@
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    align-items: start;
-}
-
-.business-image {
-    width: 100%;  
-    height: 300px;  
-    object-fit: cover;  
-    object-position: center center;  
-    border-radius: 8px;  
+    align-items: flex-start;
+    gap: 20px; /* Add vertical spacing between elements */
+  }
+  
+  .business-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 8px;
     margin-bottom: 20px;
-}
-
-
-
-.business-details h2 {
+  }
+  
+  .business-details h2 {
     font-size: 24px;
-    margin: 10px 0 0;
+    margin: 0; /* Remove top margin */
     color: #333;
     text-align: left;
-}
-
-.business-details div {
-    margin-top: 10px;
+  }
+  
+  .business-details div {
     font-size: 16px;
     color: #666;
     text-align: left;
-}
-
-.review-button-container {
+  }
+  
+  .review-button-container {
     margin-top: 20px;
-}
-
-.manage-business-button,
-.write-review-button,
-.review-buttons button {
+  }
+  
+  .manage-business-button,
+  .write-review-button,
+  .review-buttons button {
     margin-top: 10px;
     padding: 8px 16px;
     background-color: red;
@@ -55,36 +55,38 @@
     max-width: 150px;
     width: 100%;
     text-align: center;
-}
-
-.manage-business-button:hover,
-.write-review-button:hover,
-.review-buttons button:hover {
-    background-color: #aa0000;
-}
-
-.reviews-container {
-    display: flex;
-    flex-direction: column; /* Display reviews in a column */
-    align-items: flex-start; /* Align the entire container to the left */
   }
-
-
-@media (min-width: 600px) {
+  
+  .manage-business-button:hover,
+  .write-review-button:hover,
+  .review-buttons button:hover {
+    background-color: #aa0000;
+  }
+  
+  .reviews-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px; /* Add vertical spacing between reviews */
+    width: 100%; /* Make sure it spans the entire width */
+  }
+  
+  @media (min-width: 600px) {
     .reviews-container {
-        max-width: 600px;
+      max-width: 600px;
     }
-}
-
-/* SingleBusiness.css */
-
-.business-header {
+  }
+  
+  /* SingleBusiness.css */
+  
+  .business-header {
     display: flex;
     align-items: center;
     gap: 10px;
-}
-
-.business-rating {
-    font-size: 24px; /* Adjust size as needed */
+  }
+  
+  .business-rating {
+    font-size: 24px;
     color: gold;
-}
+  }
+  

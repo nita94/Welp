@@ -32,7 +32,6 @@ function Navigation() {
         <h1 className="home">
           <img src={process.env.PUBLIC_URL + '/images/welp_logo.png'} alt="Welp" className="logo" /> Welp
         </h1>
-        <FontAwesomeIcon icon={["fab", "yelp"]} style={{ color: "#ff1a1a" }} />
       </NavLink>
       <div className="search-bar-container">
         <input type="text" placeholder="Search for businesses..." />

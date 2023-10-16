@@ -26,8 +26,11 @@ const AllBusinesses = () => {
 
   if (!businesses.length) return null;
 
+  // Define the background image URL
+  const backgroundImageURL = process.env.PUBLIC_URL + '/images/chopboard.png';
+
   return (
-    <div className='all-businesses-page'>
+    <div className='all-businesses-page' style={{ backgroundImage: `url(${backgroundImageURL})` }}>
       <div className='business-intro'>
         <h1 className='business-intro-text'>
           Choose a business or a star rating below to write a review!
