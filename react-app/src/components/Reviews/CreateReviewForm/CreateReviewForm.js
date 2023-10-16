@@ -1,4 +1,4 @@
-// CreateReviewForm.js
+// C: CreateReviewForm.js
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { createReview } from '../../../store/reviews';
 import { useModal } from '../../../context/Modal';
 import './CreateReviewForm.css';
 
-const CreateReviewForm = ({ businessId, onReviewSubmit }) => { // B: Added onReviewSubmit prop
+const CreateReviewForm = ({ businessId, onReviewSubmit }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { closeModal } = useModal();
@@ -22,6 +22,8 @@ const CreateReviewForm = ({ businessId, onReviewSubmit }) => { // B: Added onRev
 
   const handleCreateReview = async (e) => {
     e.preventDefault();
+
+    console.log("Business ID at form submission:", businessId); // Added this line
 
     const errorsObj = {};
 

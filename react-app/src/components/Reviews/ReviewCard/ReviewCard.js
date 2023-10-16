@@ -4,7 +4,7 @@ import UpdateReviewForm from '../UpdateReviewForm/UpdateReviewForm';
 import DeleteReview from '../DeleteReview/DeleteReview';
 import './ReviewCard.css';
 
-const ReviewCard = ({ review, user, onReviewDelete }) => {
+const ReviewCard = ({ review, user, onReviewDelete, singleBusinessPage }) => {
     const [isTextTruncated, setIsTextTruncated] = useState(true);
     const newDate = new Date(review?.created_at).toLocaleDateString();
 
@@ -12,8 +12,11 @@ const ReviewCard = ({ review, user, onReviewDelete }) => {
         setIsTextTruncated(!isTextTruncated);
     };
 
+    // Conditionally apply a class for left alignment
+    const cardClassName = `review-card ${singleBusinessPage ? 'left-align' : ''}`;
+
     return (
-        <div className="review-card">
+        <div className={cardClassName}>
             <div className="reviewer-info">
                 <strong>{review.username || 'N/A'}</strong>
             </div>

@@ -1,4 +1,3 @@
-// A
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
@@ -89,7 +88,9 @@ const SingleBusiness = () => {
       <h3>Reviews</h3>
       <div className="reviews-container">
         {reviews.length > 0 ? (
-          reviews.map((review) => <ReviewCard key={review.id} review={review} user={user} />)
+          reviews.map((review) => (
+            <ReviewCard key={review.id} review={review} user={user} singleBusinessPage={true} />
+          ))
         ) : (
           <p>No reviews available.</p>
         )}

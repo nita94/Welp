@@ -5,7 +5,7 @@ import { authenticate } from "./store/session";
 import { ModalProvider } from "./context/Modal"; // Import the ModalProvider
 
 import Navigation from "./components/Landing/Navigation";
-import Footer from "./components/Landing/Footer/Footer"
+import Footer from "./components/Landing/Footer/Footer";
 import LoginFormPage from "./components/Landing/LoginFormPage";
 import SignupFormPage from "./components/Landing/SignupFormPage";
 import LandingPage from "./components/Landing/LandingPage";
@@ -50,9 +50,7 @@ function App() {
           <Route path="/businesses/:businessId" exact>
             <SingleBusiness />
           </Route>
-          <Route path="/businesses/:businessId/reviews/new">
-            <CreateReviewForm />
-          </Route>
+          <Route path="/businesses/:businessId/reviews/new" render={(props) => <CreateReviewForm businessId={props.match.params.businessId} />} />
           {userId && (
             <Route path="/businesses/:businessId/managebusiness">
               <ManageYourBusinesses />
