@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../../store/session";
-import './SignupForm.css';
+import './SignupFormPage.css';
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -28,51 +28,55 @@ function SignupFormPage() {
   };
 
   return (
-    <>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+    <div className="signup-form-page-container">
+      <h1 className="signup-form-page-h1">Sign Up</h1>
+      <form onSubmit={handleSubmit} className="signup-form-page-form">
+        <ul className="error-list">
+          {errors.map((error, idx) => <li key={idx} className="error">{error}</li>)}
         </ul>
-        <label>
+        <label className="signup-form-page-label">
           Email
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            className="signup-form-page-input"
           />
         </label>
-        <label>
+        <label className="signup-form-page-label">
           Username
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            className="signup-form-page-input"
           />
         </label>
-        <label>
+        <label className="signup-form-page-label">
           Password
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="signup-form-page-input"
           />
         </label>
-        <label>
+        <label className="signup-form-page-label">
           Confirm Password
           <input
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            className="signup-form-page-input"
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="signup-form-page-button">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 
