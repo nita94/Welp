@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom"; // Added Redirect import here
 import { authenticate } from "./store/session";
-import { ModalProvider } from "./context/Modal"; // Import the ModalProvider
+import { ModalProvider } from "./context/Modal"; 
 
 import Navigation from "./components/Landing/Navigation";
 import Footer from "./components/Landing/Footer/Footer";
@@ -50,7 +50,14 @@ function App() {
           <Route path="/businesses/:businessId" exact>
             <SingleBusiness />
           </Route>
-          <Route path="/businesses/:businessId/reviews/new" render={(props) => <CreateReviewForm businessId={props.match.params.businessId} />} />
+          <Route 
+            path="/businesses/:businessId/reviews/new" 
+            render={(props) => 
+              user ? 
+              (<CreateReviewForm businessId={props.match.params.businessId} />) :
+              (<Redirect to="/login" />)
+            }
+          />
           {userId && (
             <Route path="/businesses/:businessId/managebusiness">
               <ManageYourBusinesses />

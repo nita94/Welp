@@ -9,7 +9,9 @@ import './../../../index.css';
 const AllBusinesses = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
+  
+  const user = useSelector((state) => state.session.user);
+  
   const businesses = useSelector((state) =>
     Object.values(state.businesses.allBusinesses)
   );
@@ -50,26 +52,31 @@ const AllBusinesses = () => {
               <div>{business.address}</div>
               <div>Do you recommend this business?</div>
               <div className='star-rating'>
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <span
-                    key={star}
-                    className={`star ${
-                      star <= (hoverRating[business.id] || 0) ? 'filled' : ''
-                    }`}
-                    onMouseEnter={() =>
-                      setHoverRating((prev) => ({ ...prev, [business.id]: star }))
-                    }
-                    onMouseLeave={() =>
-                      setHoverRating((prev) => ({ ...prev, [business.id]: 0 }))
-                    }
-                    onClick={() => {
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className={`star ${
+                    star <= (hoverRating[business.id] || 0) ? 'filled' : ''
+                  }`}
+                  onMouseEnter={() =>
+                    setHoverRating((prev) => ({ ...prev, [business.id]: star }))
+                  }
+                  onMouseLeave={() =>
+                    setHoverRating((prev) => ({ ...prev, [business.id]: 0 }))
+                  }
+                  onClick={() => {
+                    if (!user) {
+                      history.push('/login');
+                    } else {
                       history.push(`/businesses/${business.id}/reviews/new`);
-                    }}
-                  >
-                    ★
-                  </span>
-                ))}
-              </div>
+                    }
+                  }}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+
             </div>
           );
         })}

@@ -1,4 +1,3 @@
-// C: CreateReviewForm.js
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -10,20 +9,23 @@ const CreateReviewForm = ({ businessId, onReviewSubmit }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { closeModal } = useModal();
-  const userId = useSelector((state) => state.session.user.id);
+
+  const user = useSelector((state) => state.session.user);
+  const userId = user ? user.id : null;
+
+  useEffect(() => {
+    if (!user) {
+      history.push('/login');
+    }
+  }, [user, history]);
+
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [errors, setErrors] = useState([]);
 
-  useEffect(() => {
-    console.log('Business ID in CreateReviewForm:', businessId);
-  }, [businessId]);
-
   const handleCreateReview = async (e) => {
     e.preventDefault();
-
-    console.log("Business ID at form submission:", businessId); // Added this line
 
     const errorsObj = {};
 
@@ -40,18 +42,13 @@ const CreateReviewForm = ({ businessId, onReviewSubmit }) => {
 
     if (Object.keys(errorsObj).length === 0) {
       try {
-        console.log('Submitting review:', reviewData);
         const response = await dispatch(createReview(reviewData, businessId));
-        console.log('Review Data:', response);
 
         closeModal();
-
         history.push(`/businesses/${businessId}`);
-        
-        // B: Call the onReviewSubmit function to update hasReviewed state in SingleBusiness component
+
         onReviewSubmit();
       } catch (error) {
-        console.error('Fetch Error:', error);
         setErrors([...errors, 'An error occurred while creating the review.']);
       }
     } else {
