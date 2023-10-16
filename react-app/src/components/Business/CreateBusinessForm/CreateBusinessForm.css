@@ -1,8 +1,7 @@
-/* CreateBusinessForm.css */
-
 .create-business-form-container {
-    max-width: 500px; /* Increased max-width value */
+    max-width: 500px; 
     margin: auto;
+    margin-bottom: 20px; /* New margin added */
     background-color: #FFFFFF;
     padding: 20px;
     border-radius: 8px;
@@ -31,7 +30,7 @@ label {
 input,
 textarea {
     width: 100%;
-    padding: 10px 2px; /* Reduced padding-right value to 5px */
+    padding: 10px 2px; 
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;

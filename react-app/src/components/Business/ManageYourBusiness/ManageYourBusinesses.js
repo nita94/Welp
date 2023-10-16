@@ -7,6 +7,8 @@ import DeleteBusiness from '../DeleteBusiness/DeleteBusiness';
 import OpenModalButton from "../../Landing/OpenModalButton";
 import CreateBusinessForm from "../CreateBusinessForm/CreateBusinessForm";
 import "./ManageYourBusinesses.css"; // Import the CSS file
+import "../DeleteBusiness/DeleteBusiness.css"
+import "../UpdateBusinessForm/UpdateBusinessForm.css"
 
 const ManageYourBusinesses = () => {
     const dispatch = useDispatch();
@@ -19,11 +21,6 @@ const ManageYourBusinesses = () => {
     useEffect(() => {
         dispatch(getBusinesses());
     }, [dispatch]);
-
-    // Add console logs to check the values
-    console.log('All Businesses:', businesses);
-    console.log('User:', user);
-    console.log('Owned Businesses:', ownedBusinesses);
 
     return (
         <div className="manage-businesses-container">
@@ -46,12 +43,12 @@ const ManageYourBusinesses = () => {
                                 <OpenModalButton
                                     buttonText="Update Business"
                                     modalComponent={<UpdateBusinessForm business={business} />}
-                                    className="button" // Use the correct class name for styling
+                                    className="button button-update" // Use the correct class name for styling
                                 />
                                 <OpenModalButton
                                     buttonText="Delete Business"
                                     modalComponent={<DeleteBusiness businessId={business.id} />}
-                                    className="button" // Use the correct class name for styling
+                                    className="button button-delete" // Use the correct class name for styling
                                 />
                             </div>
                         </div>

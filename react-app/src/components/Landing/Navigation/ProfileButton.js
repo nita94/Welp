@@ -56,7 +56,12 @@ function ProfileButton() {
           ></div>
         ) : (
           <div className="profileImage">
-            <i className="fa-solid fa-user" style={{ fontSize: "25px", opacity: "0.6" }} />
+            {/* Replace the "Welp" logo with the new image */}
+            <img
+              src={process.env.PUBLIC_URL + '/images/profileicon.png'}
+              alt="User Profile"
+              className="profileIcon" // Add this class for styling
+            />
           </div>
         )}
       </div>

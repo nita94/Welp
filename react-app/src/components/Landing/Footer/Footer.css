@@ -1,4 +1,4 @@
-/* Footer.css */
+/* Updated Footer.css */
 
 .footerWrapper {
   background-color: #f3f3f3;
@@ -10,6 +10,26 @@
   width: 80%;
   height: 100%;
   margin: auto;
+}
+
+.footer-header {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: #333;
+  align-self: flex-start; /* align to the start (left) */
+}
+
+.footer-header h1 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #333;
+  display: flex; /* make this a flex container */
+  align-items: center; /* align items vertically */
+}
+
+.footer-header h1 img {
+  margin-right: 30px; /* significantly increased margin to the right of the logo */
 }
 
 .footer-col {
@@ -29,38 +49,29 @@
   color: #333;
 }
 
-/* Reduce margin-top here to adjust the space */
 .footer-links {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px; /* Adjust this value as needed */
+  margin-top: 10px;
   font-size: 12px;
   color: #333;
+  gap: 10px;
 }
 
 .footer-links h1 {
   font-weight: 500;
-  margin-left: 3px;
   font-size: 14px;
   color: #333;
+  display: flex; /* make this a flex container */
+  align-items: center; /* align items vertically */
 }
 
-.footer-links i {
-  font-size: 14px;
-  margin-left: 1px;
-  color: #333;
+.footer-links h1 img {
+  margin-right: 30px; /* significantly increased margin to the right of the logo */
 }
 
-.footer-header {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.footer-header h1 {
-  font-size: 24px;
-  font-weight: 500;
-  margin-bottom: 10px;
-  color: #333;
+/* New class for increased spacing */
+.logo-text-spacing {
+  margin-right: 30px; /* Adjust this value as needed */
 }
