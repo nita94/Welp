@@ -8,6 +8,8 @@ import CreateReviewForm from '../../Reviews/CreateReviewForm/CreateReviewForm';
 import '../../../index.css';
 import './SingleBusiness.css'; // Import SingleBusiness.css
 import ReviewCard from '../../Reviews/ReviewCard/ReviewCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 const SingleBusiness = () => {
   const dispatch = useDispatch();
@@ -57,20 +59,41 @@ const SingleBusiness = () => {
 
   const businessOwner = user && (business.owner_user_id || business.user_id) === user.id;
 
+  // Calculate average rating for the business
+  const initial = 0;
+  const reviewsAvg =
+    reviews.length > 0
+      ? (
+          reviews
+            .map((review) => parseFloat(review.rating) || 0) // Use review.rating here
+            .reduce((acc, curr) => acc + curr, initial) /
+          reviews.length
+        ).toFixed(1)
+      : 0;
+
   return (
     <div className="single-business-page">
-      {business.image_url && (
+      {business.image_url ? (
         <img src={business.image_url} alt={business.name} className="business-image standardized-image" />
+      ) : (
+        <img src="/images/herbs.png" alt={business.name} className="business-image standardized-image" />
       )}
 
       <div className="business-details">
-        <h2>{business.name}</h2>
+        <div className="business-header">
+          <h2>{business.name}</h2>
+          <div className="business-rating">
+            {reviewsAvg} <FontAwesomeIcon icon={faStar} />
+          </div>
+        </div>
         <div>{business.address}</div>
+        <div>{business.city}, {business.state}</div> {/* Display city and state */}
+        <div>{business.hours}</div> {/* Display business hours */}
         <div>{business.description}</div>
       </div>
 
       {user && businessOwner && (
-        <Link to={`/businesses/${businessId}/managebusiness`} className="manage-business-button">
+        <Link to={`/businesses/${businessId}/managebusiness`} className="manage-business-button" style={{ marginTop: '20px' }}>
           Manage Your Business
         </Link>
       )}

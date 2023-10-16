@@ -36,6 +36,8 @@ const ManageYourBusinesses = () => {
                                 <img src={business.image_url} alt={business.name} />
                                 <div>{business.name}</div>
                                 <div>{business.address}</div>
+                                <div>{business.city}, {business.state}</div> {/* Add city and state */}
+                                <div>{business.hours}</div> {/* Add hours */}
                             </Link>
                             <div>
                                 <OpenModalButton

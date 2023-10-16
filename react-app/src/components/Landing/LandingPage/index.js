@@ -36,7 +36,9 @@ const LandingPage = () => {
               {business.name}
             </a>
             <div>{business.address}</div>
-            <div>Do you recommend this business?</div>
+            <div>{business.city}, {business.state}</div> {/* Add city and state */}
+            <div className="hours">Hours: {business.hours}</div> {/* Apply the hours class */}
+            <div className="recommendation">Do you recommend this business?</div> {/* Apply the recommendation class */}
             <div className="star-rating">
               {[1, 2, 3, 4, 5].map((star) => (
                 <span
