@@ -65,14 +65,17 @@ const SingleBusiness = () => {
     reviews.length > 0
       ? (
           reviews
-            .map((review) => parseFloat(review.rating) || 0) // Use review.rating here
+            .map((review) => parseFloat(review.rating) || 0)
             .reduce((acc, curr) => acc + curr, initial) /
           reviews.length
         ).toFixed(1)
       : 0;
 
+  // Define the background image URL
+  const backgroundImageURL = process.env.PUBLIC_URL + '/images/herbs.png';
+
   return (
-    <div className="single-business-page">
+    <div className="single-business-page" style={{ backgroundImage: `url(${backgroundImageURL})` }}>
       {business.image_url ? (
         <img src={business.image_url} alt={business.name} className="business-image standardized-image" />
       ) : (
@@ -87,8 +90,8 @@ const SingleBusiness = () => {
           </div>
         </div>
         <div>{business.address}</div>
-        <div>{business.city}, {business.state}</div> {/* Display city and state */}
-        <div>{business.hours}</div> {/* Display business hours */}
+        <div>{business.city}, {business.state}</div>
+        <div>{business.hours}</div>
         <div>{business.description}</div>
       </div>
 
@@ -103,7 +106,7 @@ const SingleBusiness = () => {
           <OpenModalButton
             buttonText="Add Review"
             modalComponent={<CreateReviewForm businessId={businessId} onReviewSubmit={handleReviewSubmitted} />}
-            buttonStyling="add-review-button" // Applying the styling class to the button
+            buttonStyling="add-review-button"
           />
         </div>
       )}

@@ -1,9 +1,10 @@
 .single-business-page {
-  /* ... other styles */
-  background-size: cover; /* Set background size to cover */
+  /* ... your current styles ... */
+  background-size: cover; 
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center top; /* Align the top of the image with the top of the container */
 }
+
 
 .single-business-container,
 .business-image {
