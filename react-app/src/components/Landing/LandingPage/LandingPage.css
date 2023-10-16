@@ -64,3 +64,14 @@
 .business-name-link:hover {
   cursor: pointer;
 }
+
+.business-tile-container div.recommendation {
+  font-size: 14px; /* Set the font size to make it smaller */
+  margin-bottom: 5px; /* Reduce the margin to decrease padding */
+}
+
+.business-tile-container div.hours {
+  font-size: 14px; /* Set the font size to make it smaller */
+  color: grey; /* Set the text color to gray */
+  margin-bottom: 5px; /* Reduce the margin to decrease padding */
+}

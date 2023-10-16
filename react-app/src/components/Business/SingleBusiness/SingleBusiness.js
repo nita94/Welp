@@ -73,8 +73,10 @@ const SingleBusiness = () => {
 
   return (
     <div className="single-business-page">
-      {business.image_url && (
+      {business.image_url ? (
         <img src={business.image_url} alt={business.name} className="business-image standardized-image" />
+      ) : (
+        <img src="/images/herbs.png" alt={business.name} className="business-image standardized-image" />
       )}
 
       <div className="business-details">

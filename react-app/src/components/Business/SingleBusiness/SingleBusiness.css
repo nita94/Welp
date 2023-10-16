@@ -1,6 +1,6 @@
 .single-business-page {
   /* ... other styles */
-  background-size: 10%;
+  background-size: cover; /* Set background size to cover */
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -116,3 +116,4 @@
   font-size: 24px;
   color: gold;
 }
+
