@@ -7,8 +7,6 @@ import DeleteBusiness from '../DeleteBusiness/DeleteBusiness';
 import OpenModalButton from "../../Landing/OpenModalButton";
 import CreateBusinessForm from "../CreateBusinessForm/CreateBusinessForm";
 import "./ManageYourBusinesses.css"; // Import the CSS file
-import "../DeleteBusiness/DeleteBusiness.css"
-import "../UpdateBusinessForm/UpdateBusinessForm.css"
 
 const ManageYourBusinesses = () => {
     const dispatch = useDispatch();
@@ -29,13 +27,13 @@ const ManageYourBusinesses = () => {
                 <OpenModalButton
                     buttonText="Add a Business"
                     modalComponent={<CreateBusinessForm />}
-                    className="button" // Use the correct class name for styling
+                    buttonStyling="add-business-button"
                 />
                 <div className="all-businesses-container">
                     {ownedBusinesses.map(business => (
                         <div className="business-tile-container" key={business.id}>
                             <Link to={`/businesses/${business.id}`}>
-                                <img src={business.image_url} alt={business.name} /> {/* Display the business image */}
+                                <img src={business.image_url} alt={business.name} />
                                 <div>{business.name}</div>
                                 <div>{business.address}</div>
                             </Link>
@@ -43,12 +41,12 @@ const ManageYourBusinesses = () => {
                                 <OpenModalButton
                                     buttonText="Update Business"
                                     modalComponent={<UpdateBusinessForm business={business} />}
-                                    className="button button-update" // Use the correct class name for styling
+                                    buttonStyling="update-business-button"
                                 />
                                 <OpenModalButton
                                     buttonText="Delete Business"
                                     modalComponent={<DeleteBusiness businessId={business.id} />}
-                                    className="button button-delete" // Use the correct class name for styling
+                                    buttonStyling="delete-business-button"
                                 />
                             </div>
                         </div>
