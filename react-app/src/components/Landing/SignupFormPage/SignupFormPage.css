@@ -1,0 +1,72 @@
+/* Signup Page Styles */
+.signup-form-page-container {
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.signup-form-page-h1 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.signup-form-page-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-form-page-label {
+  font-weight: bold;
+  color: #555;
+}
+
+.signup-form-page-input {
+  width: 100%;  /* Set width to 100% for consistency */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+/* Additional styles for better UX */
+.signup-form-page-input:focus {
+  border-color: royalblue;
+}
+
+.signup-form-page-button {
+  width: 100%;
+  height: 2.634rem;
+  background-color: royalblue;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 0.125rem;
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.3rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.signup-form-page-button:hover {
+  background-color: royalblue;  /* Ensure this provides a discernible change on hover */
+}
+
+.error-list {
+  color: #FA4D4D;
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.error {
+  color: #FA4D4D;
+}

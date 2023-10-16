@@ -72,3 +72,12 @@ def delete_review(review_id):
     db.session.delete(review_to_delete)
     db.session.commit()
     return {'message': 'Review has been removed'}
+
+@review_routes.route('/check/<int:business_id>/<int:user_id>')
+def check_review(business_id, user_id):
+    """
+    Check if a user has reviewed a business
+    """
+    review = Review.query.filter_by(business_id=business_id, user_id=user_id).first()
+    has_reviewed = review is not None
+    return {'hasReviewed': has_reviewed}

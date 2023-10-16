@@ -28,7 +28,6 @@ h1 {
     color: #c0392b;
 }
 
-/* Styling for buttons */
 .button {
     background-color: #e74c3c;
     color: #fff;
@@ -45,3 +44,12 @@ h1 {
     background-color: #c0392b;
 }
 
+.button-update {
+    background-color: #3498db; /* Change the background color for the "Update Business" button */
+    /* Other styles for the "Update Business" button */
+}
+
+.button-delete {
+    background-color: #e74c3c; /* Change the background color for the "Delete Business" button */
+    /* Other styles for the "Delete Business" button */
+}

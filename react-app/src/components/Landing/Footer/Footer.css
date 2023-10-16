@@ -1,66 +1,77 @@
-/* Footer.css */
+/* Updated Footer.css */
 
 .footerWrapper {
-    display: flex;
-    flex-direction: column;
-    background-color: #f3f3f3; /* Updated background color (off-white) */
-    color: #333; /* Updated text color (black) */
-    padding: 2rem;
-  }
-  
-  .footer-container {
-    width: 80%;
-    height: 100%;
-    margin: auto;
-  }
-  
-  .footer-col {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .footer-col ul {
-    list-style: none; /* Remove bullet points */
-    padding: 0;
-  }
-  
-  .footer-col ul li h1 {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    color: #333; /* Updated text color (black) */
-  }
-  
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    font-size: 12px;
-  }
-  
-  .footer-links h1 {
-    font-weight: 500;
-    margin-left: 3px;
-    font-size: 14px;
-    color: #333; /* Updated text color (black) */
-  }
-  
-  .footer-links i {
-    font-size: 14px;
-    margin-left: 1px;
-    color: #333; /* Updated text color (black) */
-  }
-  
-  .footer-header {
-    margin-top: 10px;
-    margin-bottom: 30px;
-  }
-  
-  .footer-header h1 {
-    font-size: 24px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    color: #333; /* Updated text color (black) */
-  }
-  
+  background-color: #f3f3f3;
+  color: #333;
+  padding: 1rem;
+}
+
+.footer-container {
+  width: 80%;
+  height: 100%;
+  margin: auto;
+}
+
+.footer-header {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: #333;
+  align-self: flex-start; /* align to the start (left) */
+}
+
+.footer-header h1 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #333;
+  display: flex; /* make this a flex container */
+  align-items: center; /* align items vertically */
+}
+
+.footer-header h1 img {
+  margin-right: 30px; /* significantly increased margin to the right of the logo */
+}
+
+.footer-col {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li h1 {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #333;
+  gap: 10px;
+}
+
+.footer-links h1 {
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+  display: flex; /* make this a flex container */
+  align-items: center; /* align items vertically */
+}
+
+.footer-links h1 img {
+  margin-right: 30px; /* significantly increased margin to the right of the logo */
+}
+
+/* New class for increased spacing */
+.logo-text-spacing {
+  margin-right: 30px; /* Adjust this value as needed */
+}

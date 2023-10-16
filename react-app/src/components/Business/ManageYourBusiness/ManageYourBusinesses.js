@@ -1,5 +1,3 @@
-// ManageYourBusinesses.js
-
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +7,8 @@ import DeleteBusiness from '../DeleteBusiness/DeleteBusiness';
 import OpenModalButton from "../../Landing/OpenModalButton";
 import CreateBusinessForm from "../CreateBusinessForm/CreateBusinessForm";
 import "./ManageYourBusinesses.css"; // Import the CSS file
+import "../DeleteBusiness/DeleteBusiness.css"
+import "../UpdateBusinessForm/UpdateBusinessForm.css"
 
 const ManageYourBusinesses = () => {
     const dispatch = useDispatch();
@@ -43,12 +43,12 @@ const ManageYourBusinesses = () => {
                                 <OpenModalButton
                                     buttonText="Update Business"
                                     modalComponent={<UpdateBusinessForm business={business} />}
-                                    className="button" // Use the correct class name for styling
+                                    className="button button-update" // Use the correct class name for styling
                                 />
                                 <OpenModalButton
                                     buttonText="Delete Business"
                                     modalComponent={<DeleteBusiness businessId={business.id} />}
-                                    className="button" // Use the correct class name for styling
+                                    className="button button-delete" // Use the correct class name for styling
                                 />
                             </div>
                         </div>

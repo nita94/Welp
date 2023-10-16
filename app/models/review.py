@@ -24,9 +24,10 @@ class Review(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'business_id': self.business_id,
-            'content': self.content,  # corrected from 'title'
+            'content': self.content,
             'rating': self.rating,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-    }
+            'username': self.reviewer.username  # Add this line to include the username in the response
+        }
 

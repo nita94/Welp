@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBusinesses } from '../../../store/businesses';
 import { Link } from 'react-router-dom';
 import './LandingPage.css';
-import Footer from '../Footer/Footer'; 
 
 const LandingPage = () => {
   const dispatch = useDispatch();
@@ -47,7 +46,6 @@ const LandingPage = () => {
           ))}
         </div>
       </section>
-      <Footer />
     </div>
   );
 };
