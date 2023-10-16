@@ -1,4 +1,3 @@
-// A
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
@@ -7,7 +6,7 @@ import { getReviews } from '../../../store/reviews';
 import OpenModalButton from '../../Landing/OpenModalButton';
 import CreateReviewForm from '../../Reviews/CreateReviewForm/CreateReviewForm';
 import '../../../index.css';
-import './SingleBusiness.css';
+import './SingleBusiness.css'; // Import SingleBusiness.css
 import ReviewCard from '../../Reviews/ReviewCard/ReviewCard';
 
 const SingleBusiness = () => {
@@ -32,7 +31,6 @@ const SingleBusiness = () => {
     dispatch(getReviews(businessId));
   }, [dispatch, businessId, user]);
 
-  // Add a loading state
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -45,22 +43,22 @@ const SingleBusiness = () => {
     setHasReviewed(true);
   };
 
+  const handleReviewDeleted = () => {
+    setHasReviewed(false);
+  };
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
   if (!business) {
-    return (
-      <p>
-        Error: Business data not loaded. Check the businessId: {businessId} and Redux state.
-      </p>
-    );
+    return <p>Error: Business data not loaded. Check the businessId: {businessId} and Redux state.</p>;
   }
 
   const businessOwner = user && (business.owner_user_id || business.user_id) === user.id;
 
   return (
-    <div className="single-business-container">
+    <div className="single-business-page">
       {business.image_url && (
         <img src={business.image_url} alt={business.name} className="business-image standardized-image" />
       )}
@@ -82,6 +80,7 @@ const SingleBusiness = () => {
           <OpenModalButton
             buttonText="Add Review"
             modalComponent={<CreateReviewForm businessId={businessId} onReviewSubmit={handleReviewSubmitted} />}
+            buttonStyling="add-review-button" // Applying the styling class to the button
           />
         </div>
       )}
@@ -89,7 +88,9 @@ const SingleBusiness = () => {
       <h3>Reviews</h3>
       <div className="reviews-container">
         {reviews.length > 0 ? (
-          reviews.map((review) => <ReviewCard key={review.id} review={review} user={user} />)
+          reviews.map((review) => (
+            <ReviewCard key={review.id} review={review} user={user} singleBusinessPage={true} onReviewDelete={handleReviewDeleted} />
+          ))
         ) : (
           <p>No reviews available.</p>
         )}

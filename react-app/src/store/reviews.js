@@ -102,9 +102,13 @@ export const updateReview = (reviewId, updatedReview) => async (dispatch) => {
 export const deleteReview = (reviewId) => async (dispatch) => {
     const res = await fetch(`/api/reviews/${reviewId}`, { method: 'DELETE' });
     if (res.ok) {
+        console.log('Review deleted, dispatching removeReview action'); // NEW LOG
         dispatch(removeReview(reviewId));
+    } else {
+        console.error('Failed to delete review', res.statusText);
     }
 };
+
 
 // INITIAL STATE
 const initialState = { allReviews: [], isLoading: false, error: null };

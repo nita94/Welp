@@ -16,7 +16,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 @review_routes.route('/<int:business_id>')
-@login_required
+
 def get_all_reviews(business_id):
     """
     Get all reviews for a business

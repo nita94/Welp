@@ -13,7 +13,6 @@ function Navigation() {
   const sessionUser = useSelector((state) => state.session.user);
   const location = useLocation();
 
-  // State to manage the dropdown visibility
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Toggle the dropdown visibility
@@ -21,10 +20,19 @@ function Navigation() {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  // Function to close the dropdown
-  const closeDropdown = () => {
-    setIsDropdownOpen(false);
-  };
+  const [showFeatureMessage, setShowFeatureMessage] = useState(false);
+
+  const handleSearch = () => {
+    // Show the "Feature coming soon" message
+    setShowFeatureMessage(true);
+
+    // Hide the "Feature coming soon" message after 2 seconds
+    setTimeout(() => {
+      setShowFeatureMessage(false);
+    }, 2000);
+
+    // You can add any logic here for future search functionality
+  }
 
   return (
     <ul className="navbar">
@@ -32,25 +40,27 @@ function Navigation() {
         <h1 className="home">
           <img src={process.env.PUBLIC_URL + '/images/welp_logo.png'} alt="Welp" className="logo" /> Welp
         </h1>
-        <FontAwesomeIcon icon={["fab", "yelp"]} style={{ color: "#ff1a1a" }} />
       </NavLink>
       <div className="search-bar-container">
         <input type="text" placeholder="Search for businesses..." />
-        <button type="button" onClick={() => window.location.href = '/search'}>
+        <button type="button" onClick={handleSearch}>
           Search
         </button>
+        {showFeatureMessage && (
+          <div className="feature-message">
+            Feature coming soon!
+          </div>
+        )}
       </div>
-      <div className="nav-buttons">
-        <div className="dropdown-container">
-          <button onClick={toggleDropdown} className="nav-button business">
-            Welp for Business
-          </button>
-          <DropdownMenu isOpen={isDropdownOpen} closeDropdown={closeDropdown} />
-        </div>
-        <NavLink className="nav-button business" to="/businesses">
-          Write a Review
-        </NavLink>
+      <div className="dropdown-container">
+        <button onClick={toggleDropdown} className="nav-button business">
+          Welp for Business
+        </button>
+        <DropdownMenu isOpen={isDropdownOpen} closeDropdown={toggleDropdown} />
       </div>
+      <NavLink className="nav-button business" to="/businesses">
+        Write a Review
+      </NavLink>
       <div className="iconLinks">
         <a id="fabLink1" href="https://github.com/nita94" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faGithub} size="2x" style={{ color: "#000" }} />
